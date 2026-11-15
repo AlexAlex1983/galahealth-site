@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GALA Health — Global Alliance for Air, Lungs and Health</title>
+  <title>GALA Health — Global Alliance for Lungs, Air and Health</title>
   <meta name="description" content="GALA Health works with governments, health systems, and partners to advance the prevention and control of chronic respiratory diseases.">
   <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=202611151231">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611151324">
 </head>
 <body>
 <div id="site-header"></div>
@@ -23,11 +22,23 @@
           <p class="t-body">Yet lung health remains consistently under-prioritized - in national strategies, in global financing, in public understanding</p>
         </div>
         <div class="visual">
-          <img class="hero-photo" src="assets/img/hero-who-rebecca-conway.jpg" alt="Patient doing a lung function test with a spirometer">
-          <p class="tag">Global Alliance for Air, Lungs and Health (GALA Health) exists to change that.</p>
-          <p class="caption">Copyright: @WHO/Rebecca Conway</p>
+          <figure class="photo"><img class="hero-photo" src="assets/img/hero-who-rebecca-conway.jpg" alt="Patient doing a lung function test with a spirometer"><figcaption class="credit">© WHO / Rebecca Conway</figcaption></figure>
+          <p class="tag">The Global Alliance for Lungs, Air and Health (GALA Health) exists to change that.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Numbers band (update figures + sources here) -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="stats">
+        <div class="stat"><strong>545 million</strong><span>people live with a chronic respiratory disease</span></div>
+        <div class="stat"><strong>3rd</strong><span>leading cause of death: chronic respiratory diseases, after heart disease and cancer</span></div>
+        <div class="stat"><strong>3.5 million</strong><span>deaths from COPD in 2021 — the 4th leading cause of death worldwide</span></div>
+        <div class="stat"><strong>~90%</strong><span>of COPD deaths under age 70 occur in low- and middle-income countries</span></div>
+      </div>
+      <p class="stats-src">Sources: <a href="https://doi.org/10.1016/S2213-2600(20)30105-3" target="_blank" rel="noopener">GBD 2017, The Lancet Respiratory Medicine (2020)</a>; <a href="https://www.who.int/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease-(copd)" target="_blank" rel="noopener">WHO COPD fact sheet</a>.</p>
     </div>
   </section>
 
@@ -36,10 +47,10 @@
     <div class="container split">
       <img class="rounded" src="assets/img/tild6234-666-53386cbceb235bce6403.jpg" alt="Caregiver comforting a child using an oxygen mask" style="aspect-ratio:608/600;object-fit:cover;width:100%">
       <div class="stack" style="padding-left:20px">
-        <span class="pill">Gala Health</span>
+        <span class="pill">Who we are</span>
         <h2 class="t-h1" style="margin-top:36px">Our Role &amp; Expertise</h2>
         <p class="t-body" style="margin-top:40px">We provide technical assistance, policy advisory, implementation guidance, and capacity-building - tailored to national contexts.</p>
-        <p class="t-body" style="margin-top:28px">Gala Health works with governments, health systems, and partners to advance the prevention and control of chronic respiratory diseases.</p>
+        <p class="t-body" style="margin-top:28px">GALA Health works with governments, health systems, and partners to advance the prevention and control of chronic respiratory diseases.</p>
       </div>
     </div>
   </section>
@@ -59,11 +70,10 @@
           <h3 class="t-h3">Evidence-driven</h3>
         </div>
         <div class="approach-card">
-          <img src="assets/img/tild6238-376-d715925fc0aa4a17060e.jpg" alt="Partners working together around a table">
+          <figure class="photo"><img src="assets/img/tild6238-376-d715925fc0aa4a17060e.jpg" alt="Partners working together around a table"><figcaption class="credit">© WHO / Laurent Cipriani</figcaption></figure>
           <h3 class="t-h3">Partnership-based</h3>
         </div>
       </div>
-      <p class="caption">Homepage Partnership" © WHO / Laurent Cipriani</p>
     </div>
   </section>
 
@@ -118,13 +128,27 @@
     </div>
   </section>
 
+  <!-- Latest news (pulled live from news.galahealth.org/news.json) -->
+  <section class="section" id="latest-news-section" hidden>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:50px">
+        <div>
+          <span class="pill">News</span>
+          <h2 class="t-h1" style="margin-top:24px">Latest from GALA Health</h2>
+        </div>
+        <a class="btn" href="https://news.galahealth.org/">All news &amp; publications</a>
+      </div>
+      <div class="news-grid" id="latest-news"></div>
+    </div>
+  </section>
+
   <!-- Lead form -->
   <section class="section">
     <div class="container lead">
       <div class="photo"><img class="cover" src="assets/img/tild6165-656-1ca30c9b051994c9fb5d.jpg" alt="Children running on a beach"></div>
       <div class="form-card">
         <h2 class="t-h3">Transform lung health</h2>
-        <p style="font-size:18px;margin-top:14px">Leave your details, and our team will reach out to you</p>
+        <p class="t-body" style="margin-top:14px">Leave your details, and our team will reach out to you</p>
         <form data-gala-form="lead">
           <input class="input" name="name" placeholder="Full Name" required>
           <input class="input" name="organization" placeholder="Organization">
@@ -139,8 +163,8 @@
 </main>
 
 <div id="site-footer"></div>
-<script src="data/events.js?v=202611151231"></script>
-<script src="assets/site.js?v=202611151231"></script>
-<script src="assets/calendar.js?v=202611151231"></script>
+<script src="data/events.js?v=202611151324"></script>
+<script src="assets/site.js?v=202611151324"></script>
+<script src="assets/calendar.js?v=202611151324"></script>
 </body>
 </html>

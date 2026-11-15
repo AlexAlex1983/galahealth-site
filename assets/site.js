@@ -89,30 +89,58 @@ const FOCUS = [
       </footer>`;
   }
 
-  // Forms: <form data-gala-form="lead|newsletter">
+  // Latest news from news.galahealth.org (Home page)
+  const newsBox = document.getElementById("latest-news");
+  if (newsBox) {
+    fetch("https://news.galahealth.org/news.json", { cache: "no-cache" })
+      .then((r) => r.json())
+      .then((items) => {
+        items.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+        newsBox.innerHTML = items.slice(0, 3).map((n) => `
+          <a class="news-card" href="https://news.galahealth.org/" >
+            <span class="news-date">${new Date(n.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+            <h3 class="t-h4">${esc(n.title)}</h3>
+            <p class="t-body">${esc(n.summary)}</p>
+            <span class="news-more">Read more →</span>
+          </a>`).join("");
+        if (items.length) document.getElementById("latest-news-section").hidden = false;
+      })
+      .catch(() => {});
+  }
+
+  // Forms: <form data-gala-form="lead|newsletter"> -> Google Apps Script web app (writes to a Google Sheet + emails info@)
   document.querySelectorAll("form[data-gala-form]").forEach((form) => {
+    // invisible honeypot field to stop spam bots
+    const hp = document.createElement("input");
+    hp.type = "text"; hp.name = "website"; hp.tabIndex = -1; hp.autocomplete = "off";
+    hp.setAttribute("aria-hidden", "true");
+    hp.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;opacity:0";
+    form.appendChild(hp);
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const msg = form.querySelector(".form-msg");
-      const data = Object.fromEntries(new FormData(form).entries());
-      data.form = form.dataset.galaForm;
-      if (SITE.formEndpoint) {
-        try {
-          const r = await fetch(SITE.formEndpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Accept: "application/json" },
-            body: JSON.stringify(data),
-          });
-          if (!r.ok) throw new Error();
-          form.reset();
-          if (msg) msg.textContent = "Thank you! We'll be in touch soon.";
-        } catch {
-          if (msg) msg.textContent = `Something went wrong. Please email us at ${SITE.email}.`;
-        }
-      } else {
-        const subject = data.form === "newsletter" ? "Mailing list subscription" : "Website enquiry";
-        const body = Object.entries(data).filter(([k]) => k !== "form").map(([k, v]) => `${k}: ${v}`).join("\n");
-        location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const msg = form.querySelector(".form-msg") || form.parentNode.querySelector(".form-msg");
+      const btn = form.querySelector('button[type="submit"]');
+      const data = new URLSearchParams(new FormData(form));
+      data.set("form", form.dataset.galaForm);
+      data.set("page", location.pathname);
+      if (!SITE.formEndpoint) {
+        location.href = `mailto:${SITE.email}?subject=${encodeURIComponent("Website enquiry")}&body=${encodeURIComponent([...data].filter(([k]) => !["form", "page", "website"].includes(k)).map(([k, v]) => `${k}: ${v}`).join("\n"))}`;
+        return;
+      }
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = "Sending…"; }
+      try {
+        // Apps Script doesn't send CORS headers, so the response is opaque; a network error still throws.
+        await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: data });
+        form.reset();
+        if (msg) msg.textContent = form.dataset.galaForm === "newsletter"
+          ? "Thank you — you're on the list."
+          : "Thank you! We'll be in touch soon.";
+      } catch {
+        if (msg) msg.textContent = `Something went wrong. Please email us at ${SITE.email}.`;
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
       }
     });
   });
