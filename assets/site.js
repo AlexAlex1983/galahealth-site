@@ -21,6 +21,7 @@ const NAV = [
   { label: "About", href: "about.html" },
   { label: "What We Do", href: "whatwedo.html" },
   { label: "Focus Areas", href: "index.html#focus-areas" },
+  { label: "Campaigns", href: "campaigns.html" },
   { label: "Contact", href: "contact.html" },
 ];
 const FOCUS = [
@@ -70,6 +71,7 @@ const FOCUS = [
             <a href="about.html">About</a>
             <a href="whatwedo.html">What We Do</a>
             <a href="index.html#focus-areas">Focus Area</a>
+            <a href="campaigns.html">Campaigns</a>
             <a href="contact.html">Contact</a>
           </nav>
           <div class="big">
