@@ -242,3 +242,9 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 600; }
   .site-footer .bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
   .focus-card { min-height: 0; }
 }
+
+/* Social links line (footer + contact) */
+.share-line { margin: 0; }
+.share-line a, .contact-row .share a { text-decoration: none; }
+.share-line a:hover, .contact-row .share a:hover { color: var(--orange); }
+.site-footer .big .share-line a { display: inline; margin: 0; }

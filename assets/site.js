@@ -6,6 +6,7 @@
 const SITE = {
   email: "info@galahealth.org",
   x: "https://x.com/GALA_Health",
+  linkedin: "https://www.linkedin.com/company/gala-health/",
   address: "Rte de Meyrin 315, 1217 Meyrin, Geneva, Switzerland",
   logoHeader: "https://static.tildacdn.one/tild3661-6633-4733-b761-626364646562/noroot.png",
   logoFooter: "https://static.tildacdn.one/tild6635-3837-4230-a439-343634356233/50159fad1e0b568b82cc.png",
@@ -73,7 +74,7 @@ const FOCUS = [
           </nav>
           <div class="big">
             <a href="mailto:${SITE.email}">Email: ${SITE.email}</a>
-            <a href="${SITE.x}" target="_blank" rel="noopener">Share options: X</a>
+            <p class="share-line">Share options: <a href="${SITE.x}" target="_blank" rel="noopener">X</a> · <a href="${SITE.linkedin}" target="_blank" rel="noopener">LinkedIn</a></p>
           </div>
         </div>
         <div class="bottom">
