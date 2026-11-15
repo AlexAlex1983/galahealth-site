@@ -13,7 +13,7 @@ const SITE = {
   // To collect form submissions without email clients, create a free form at
   // https://formspree.io (or similar) and paste its endpoint URL here.
   // Leave empty to fall back to opening the visitor's email app.
-  formEndpoint: "",
+  formEndpoint: "https://script.google.com/macros/s/AKfycbxTuqAXYq-KRx-QnG0HQJZ0yoYoUcnAhyeAqg8uScAT3IfmTLxITxlGJmH885Jhtja7/exec",
 };
 
 const NAV = [
