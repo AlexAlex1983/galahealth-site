@@ -36,3 +36,8 @@ localize-images.sh                 Copies images off Tilda's CDN into assets/img
 4. Tick **Enforce HTTPS** in GitHub Pages once the certificate is issued.
 
 URLs changed from `/about` to `/about.html` (GitHub Pages serves both `/about` and `/about.html` for the same file, so old links keep working).
+
+## Live since 15 Nov 2026
+galahealth.org points at GitHub Pages (Namecheap: four `@` A records 185.199.108–111.153, `www` CNAME → alexalex1983.github.io).
+**Rollback to Tilda** (only while the Tilda subscription is active): set `@` A → 194.48.203.131, delete the other three `@` A records,
+change `www` back to an A record → 194.48.203.131, and delete the `CNAME` file in this repo.
