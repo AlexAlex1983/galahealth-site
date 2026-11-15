@@ -8,8 +8,8 @@ const SITE = {
   x: "https://x.com/GALA_Health",
   linkedin: "https://www.linkedin.com/company/gala-health/",
   address: "Rte de Meyrin 315, 1217 Meyrin, Geneva, Switzerland",
-  logoHeader: "https://static.tildacdn.one/tild3661-6633-4733-b761-626364646562/noroot.png",
-  logoFooter: "https://static.tildacdn.one/tild6635-3837-4230-a439-343634356233/50159fad1e0b568b82cc.png",
+  logoHeader: "assets/img/tild3661-663-noroot.png",
+  logoFooter: "assets/img/tild6635-383-50159fad1e0b568b82cc.png",
   // To collect form submissions without email clients, create a free form at
   // https://formspree.io (or similar) and paste its endpoint URL here.
   // Leave empty to fall back to opening the visitor's email app.
