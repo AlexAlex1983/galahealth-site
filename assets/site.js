@@ -17,11 +17,11 @@ const SITE = {
 };
 
 const NAV = [
-  { label: "Home", href: "index.html" },
   { label: "About", href: "about.html" },
   { label: "What We Do", href: "whatwedo.html" },
   { label: "Focus Areas", href: "index.html#focus-areas" },
   { label: "Campaigns", href: "campaigns.html" },
+  { label: "News", href: "news.html" },
   { label: "Contact", href: "contact.html" },
 ];
 const FOCUS = [
@@ -32,7 +32,7 @@ const FOCUS = [
 
 (function () {
   const page = location.pathname.split("/").pop() || "index.html";
-  const isActive = (href) => href === page || (page === "" && href === "index.html");
+  const isActive = (href) => href === page || (page === "article.html" && href === "news.html");
 
   const header = document.getElementById("site-header");
   if (header) {
@@ -48,6 +48,7 @@ const FOCUS = [
         </div>
       </header>
       <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
         ${NAV.map((n) => `<a href="${n.href}">${n.label}</a>${n.label === "Focus Areas" ? FOCUS.map((f) => `<a class="sub" href="${f.href}">${f.label}</a>`).join("") : ""}`).join("")}
         <p style="margin-top:24px"><a class="btn" href="mailto:${SITE.email}" style="border:0">Get in Touch</a></p>
       </div>`;
@@ -70,8 +71,9 @@ const FOCUS = [
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="whatwedo.html">What We Do</a>
-            <a href="index.html#focus-areas">Focus Area</a>
+            <a href="index.html#focus-areas">Focus Areas</a>
             <a href="campaigns.html">Campaigns</a>
+            <a href="news.html">News</a>
             <a href="contact.html">Contact</a>
           </nav>
           <div class="big">
@@ -87,26 +89,6 @@ const FOCUS = [
           </div>
         </div>
       </footer>`;
-  }
-
-  // Latest news from news.galahealth.org (Home page)
-  const newsBox = document.getElementById("latest-news");
-  if (newsBox) {
-    fetch("https://news.galahealth.org/news.json", { cache: "no-cache" })
-      .then((r) => r.json())
-      .then((items) => {
-        items.sort((a, b) => new Date(b.date) - new Date(a.date));
-        const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-        newsBox.innerHTML = items.slice(0, 3).map((n) => `
-          <a class="news-card" href="https://news.galahealth.org/" >
-            <span class="news-date">${new Date(n.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
-            <h3 class="t-h4">${esc(n.title)}</h3>
-            <p class="t-body">${esc(n.summary)}</p>
-            <span class="news-more">Read more →</span>
-          </a>`).join("");
-        if (items.length) document.getElementById("latest-news-section").hidden = false;
-      })
-      .catch(() => {});
   }
 
   // Forms: <form data-gala-form="lead|newsletter"> -> Google Apps Script web app (writes to a Google Sheet + emails info@)
