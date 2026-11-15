@@ -7,6 +7,17 @@
 (function () {
   const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const slugify = (t) => String(t).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
+  // Minimal, safe formatting for article bodies: blank line = new paragraph,
+  // "## Heading", "- list item", **bold**, [link text](https://...)
+  const inline = (t) => esc(t)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|[a-z0-9._\/-]+\.html[^)\s]*)\)/gi, '<a href="$2">$1</a>');
+  const md = (body) => body.split("\n\n").map((block) => {
+    if (block.startsWith("## ")) return `<h2>${inline(block.slice(3))}</h2>`;
+    const lines = block.split("\n");
+    if (lines.every((l) => l.startsWith("- "))) return `<ul>${lines.map((l) => `<li>${inline(l.slice(2))}</li>`).join("")}</ul>`;
+    return `<p>${inline(block)}</p>`;
+  }).join("");
   const fmt = (d) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const v = (document.querySelector('script[src*="news.js"]')?.src.split("?v=")[1]) || Date.now();
   const getJSON = (f) => fetch(`data/${f}?v=${v}`).then((r) => r.json());
@@ -70,8 +81,8 @@
           <p class="news-date" style="margin-top:28px">${fmt(n.date)}</p>
           <h1 class="t-hero" style="margin-top:10px">${esc(n.title)}</h1>
           <p class="t-lead" style="font-weight:400;margin-top:24px;color:#333">${esc(n.summary)}</p>
-          ${n.image ? `<img class="article-img" src="${esc(n.image)}" alt="">` : ""}
-          <div class="article-body">${n.body.split("\n\n").map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+          ${n.image ? `<figure class="photo article-img-wrap"><img class="article-img" src="${esc(n.image)}" alt="">${n.imageCredit ? `<figcaption class="credit">${esc(n.imageCredit)}</figcaption>` : ""}</figure>` : ""}
+          <div class="article-body">${md(n.body)}</div>
           <div class="ev-actions" style="margin-top:40px">
             <a class="ev-btn" href="${x}" target="_blank" rel="noopener">Share on X</a>
             <a class="ev-btn" href="${li}" target="_blank" rel="noopener">Share on LinkedIn</a>

@@ -44,7 +44,8 @@ change `www` back to an A record → 194.48.203.131, and delete the `CNAME` file
 
 ## News & Publications (moved here from news.galahealth.org, Nov 2026)
 - **News:** edit `data/news.json`. Each entry: `title`, `date` (YYYY-MM-DD), `summary`, `body` (use `\n\n` between paragraphs),
-  optional `image` (e.g. `assets/img/my-photo.jpg`) and `slug` (URL name; made from the title if missing).
+  optional `image` (e.g. `assets/img/my-photo.jpg`), `imageCredit` (e.g. "© WHO / Name") and `slug` (URL name; made from the title if missing).
   The newest post is featured on news.html and the top three appear on the Home page. Each post gets its own page: `article.html?p=<slug>`.
 - **Publications:** edit `data/publications.json` — `title`, `type` (e.g. "Policy Brief"), `date`, `file` (put PDFs in `publications/`).
 - news.galahealth.org now forwards to galahealth.org/news.html (and old article links to the matching page).
+  Article bodies support light formatting: `## Heading`, lines starting with `- ` for bullet lists, `**bold**`, and `[link text](https://...)`.
