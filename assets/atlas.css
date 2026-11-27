@@ -1,0 +1,43 @@
+/* Lung Health Atlas (atlas.html) */
+.atlas-hero .card { padding: clamp(28px, 4vw, 50px) clamp(22px, 3vw, 40px); }
+.atlas-hero .stack > * + * { margin-top: 20px; }
+.atlas-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+.atlas-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.atlas-tab { font: 600 15px var(--font); padding: 10px 16px; border-radius: 30px; border: 0; background: var(--grey); color: #000; cursor: pointer; min-height: 44px; }
+.atlas-tab[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.atlas-search { margin-left: auto; position: relative; min-width: 240px; flex: 0 1 300px; }
+.atlas-search input { width: 100%; min-height: 46px; font: 500 16px var(--font); padding: 10px 16px; border: 2px solid #e3e3e3; border-radius: 30px; }
+.atlas-search ul { position: absolute; z-index: 10; left: 0; right: 0; top: 100%; margin: 4px 0 0; padding: 6px; list-style: none; background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.12); max-height: 280px; overflow: auto; }
+.atlas-search li button { width: 100%; text-align: left; font: 500 15px var(--font); padding: 10px 12px; border: 0; background: none; border-radius: 10px; cursor: pointer; }
+.atlas-search li button:hover, .atlas-search li button:focus { background: var(--cream); }
+.atlas-grid { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.atlas-map { position: relative; background: #eef4fa; border-radius: var(--radius); overflow: hidden; }
+.atlas-map svg { display: block; width: 100%; height: auto; }
+.atlas-map path { stroke: #fff; stroke-width: .5; vector-effect: non-scaling-stroke; cursor: pointer; transition: opacity .15s; }
+.atlas-map path:hover { opacity: .8; }
+.atlas-map path.sel { stroke: var(--navy); stroke-width: 2; }
+.atlas-tip { position: absolute; pointer-events: none; background: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.15); white-space: nowrap; }
+.atlas-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; padding: 14px 16px; font-size: 13px; font-weight: 600; color: #444; }
+.atlas-legend i { display: inline-block; width: 16px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+.atlas-def { padding: 0 16px 16px; font-size: 13px; color: var(--muted); }
+.atlas-card { background: var(--cream); border-radius: var(--radius); padding: clamp(20px, 2.5vw, 30px); }
+.atlas-card h2 { font-size: clamp(26px, 3vw, 34px); color: var(--navy); line-height: 1.1; }
+.atlas-card .sub { color: var(--muted); font-weight: 600; margin-top: 6px; }
+.atlas-stats { display: grid; gap: 12px; margin-top: 18px; }
+.atlas-stat { background: #fff; border-radius: 14px; padding: 14px 16px; }
+.atlas-stat b { display: block; font-size: 26px; color: var(--navy); white-space: nowrap; }
+.atlas-stat span { font-size: 14px; color: #333; }
+.atlas-stat small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.atlas-bar-mini { height: 6px; border-radius: 3px; background: #e9e3db; margin-top: 8px; position: relative; }
+.atlas-bar-mini i { position: absolute; top: -3px; width: 4px; height: 12px; border-radius: 2px; background: var(--orange); }
+.atlas-card .btn { margin-top: 20px; }
+.atlas-table-wrap { overflow-x: auto; margin-top: 30px; }
+.atlas-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.atlas-table th, .atlas-table td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: left; }
+.atlas-table th { font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.atlas-table td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.atlas-table tr { cursor: pointer; }
+.atlas-table tbody tr:hover { background: var(--cream); }
+.atlas-src { font-size: 13px; color: var(--muted); margin-top: 24px; }
+.atlas-src a { text-decoration: underline; }
+@media (max-width: 900px) { .atlas-grid { grid-template-columns: minmax(0, 1fr); } .atlas-search { margin-left: 0; flex-basis: 100%; } }

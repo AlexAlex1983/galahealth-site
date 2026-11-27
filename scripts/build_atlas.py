@@ -59,12 +59,22 @@ def owid(slugs):
     return None, None, {}
 
 
-GHO_SEARCH = {
-    "spirometry": ["spirometry", "peak flow"],
-    "crd_guidelines": ["chronic respiratory disease", "guidelines for the management of chronic respiratory", "evidence-based national guidelines"],
-    "ncd_plan": ["operational multisectoral national NCD policy", "operational NCD policy", "national NCD policy"],
-    "inhaled_meds": ["steroid inhaler", "bronchodilator", "inhaler"],
+# WHO GHO indicator codes (NCD Country Capacity Survey and SDG 3.4.1)
+GHO_CODES = {
+    "spirometry": "NCD_CCS_Spirom",
+    "peak_flow": "NCD_CCS_PeakFlow",
+    "crd_guidelines": "NCD_CCS_CRD_GUIDE",
+    "crd_plan": "NCD_CCS_CRDPlan",
+    "ncd_plan": "NCD_CCS_integNCDplan",
+    "bronchodilators": "NCD_CCS_Bronchodilators",
+    "steroid_inhalers": "NCD_CCS_Steroid",
+    "combo_inhaler": "NCD_CCS_ComboInhaler",
+    "ncd_premature": "NCDMORT3070",
 }
+EXTRA_OWID_WHO = {
+    "crd_death_rate_who": (["chronic-respiratory-diseases-death-rate-who-mdb"], "Chronic respiratory disease death rate (WHO Mortality Database, age-standardised)", "per 100,000", "WHO Mortality Database via Our World in Data"),
+}
+CATALOGUE_WORDS = ["respiratory", "copd", "asthma", "obstructive pulmonary", "lung"]
 
 
 def gho_indicators():
@@ -104,29 +114,34 @@ def main():
             c = countries.setdefault(iso, {"name": name})
             c[key] = [round(v, 3), yr]
 
+    for key, (slugs, label, unit, src) in EXTRA_OWID_WHO.items():
+        slug, colname, data = owid(slugs)
+        if not data:
+            missing.append({"key": key, "tried": slugs}); continue
+        years = sorted({y for _, y, _ in data.values()})
+        sources[key] = {"label": label, "unit": unit, "source": src, "column": colname,
+                        "url": f"https://ourworldindata.org/grapher/{slug}", "years": [years[0], years[-1]]}
+        for iso, (v, yr, name) in data.items():
+            countries.setdefault(iso, {"name": name})[key] = [round(v, 3), yr]
+
     inds = gho_indicators()
-    print(f"GHO indicators: {len(inds)}", file=sys.stderr)
-    catalogue = []
-    for key, words in GHO_SEARCH.items():
-        hits = [i for i in inds if any(w.lower() in (i.get("IndicatorName") or "").lower() for w in words)]
-        for h in hits:
-            catalogue.append({"key": key, "code": h["IndicatorCode"], "name": h["IndicatorName"]})
-        best = None
-        for h in hits:
-            data = gho_data(h["IndicatorCode"])
-            if len(data) > 60:
-                best = (h, data)
-                break
-        if not best:
-            missing.append({"key": key, "candidates": [h["IndicatorCode"] for h in hits][:10]})
-            continue
-        h, data = best
+    names = {i["IndicatorCode"]: i["IndicatorName"] for i in inds}
+    catalogue = [{"code": c, "name": n} for c, n in names.items() if any(w in (n or "").lower() for w in CATALOGUE_WORDS)]
+    for key, code in GHO_CODES.items():
+        data = gho_data(code)
+        if not data:
+            missing.append({"key": key, "code": code}); continue
         years = sorted({y for _, y in data.values()})
-        sources[key] = {"label": h["IndicatorName"], "unit": "", "source": "WHO Global Health Observatory (NCD Country Capacity Survey)",
-                        "url": f"https://www.who.int/data/gho/data/indicators/indicator-details/GHO/{h['IndicatorCode']}",
-                        "code": h["IndicatorCode"], "years": [years[0], years[-1]]}
+        sources[key] = {"label": names.get(code, code), "unit": "%" if code == "NCDMORT3070" else "",
+                        "source": "WHO Global Health Observatory",
+                        "url": f"https://www.who.int/data/gho/data/indicators/indicator-details/GHO/{code}",
+                        "code": code, "years": [years[0], years[-1]]}
         for iso, (v, yr) in data.items():
             if iso in countries:
+                try:
+                    v = round(float(v), 2)
+                except (TypeError, ValueError):
+                    pass
                 countries[iso][key] = [v, yr]
 
     json.dump({"generated": time.strftime("%Y-%m-%d"), "sources": sources, "countries": countries},
