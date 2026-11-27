@@ -196,36 +196,7 @@
    ]
   }
  },
- "missing": [
-  {
-   "key": "crd_death_rate",
-   "tried": [
-    "respiratory-disease-death-rate"
-   ]
-  },
-  {
-   "key": "crd_deaths",
-   "tried": [
-    "deaths-from-respiratory-disease"
-   ]
-  },
-  {
-   "key": "crd_prevalence",
-   "tried": [
-    "share-of-population-with-chronic-respiratory-diseases",
-    "chronic-respiratory-diseases-prevalence",
-    "prevalence-of-chronic-respiratory-diseases"
-   ]
-  },
-  {
-   "key": "copd_death_rate",
-   "tried": [
-    "copd-death-rate",
-    "death-rate-from-copd",
-    "chronic-obstructive-pulmonary-disease-death-rate"
-   ]
-  }
- ],
+ "missing": [],
  "gho_candidates": [
   {
    "code": "NCD_CCS_CRDPlan",
