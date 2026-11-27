@@ -67,6 +67,35 @@
     2024
    ]
   },
+  "che_pc": {
+   "label": "Current health expenditure per capita",
+   "unit": "US$",
+   "source": "World Bank",
+   "code": "SH.XPD.CHEX.PC.CD",
+   "url": "https://data.worldbank.org/indicator/SH.XPD.CHEX.PC.CD",
+   "years": [
+    2020,
+    2024
+   ]
+  },
+  "gdp_pc": {
+   "label": "GDP per capita",
+   "unit": "US$",
+   "source": "World Bank",
+   "code": "NY.GDP.PCAP.CD",
+   "url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD",
+   "years": [
+    2011,
+    2025
+   ]
+  },
+  "pop_30_79": {
+   "label": "Population aged 30–79",
+   "unit": "people",
+   "source": "World Bank (UN population estimates)",
+   "url": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+   "years": []
+  },
   "spirometry": {
    "label": "General availability of spirometry at the primary health care level",
    "unit": "",
