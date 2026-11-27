@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free lung health check in 2 minutes — GALA Health</title>
+  <meta name="description" content="Answer 11 quick questions, see the air quality where you live and learn when to talk to a doctor about your breathing. Free and anonymous.">
+  <meta property="og:title" content="How are your lungs today? Free 2-minute lung check">
+  <meta property="og:description" content="11 quick questions, the air where you live, and clear next steps. Free and anonymous. #HearYourLungs">
+  <meta property="og:url" content="https://galahealth.org/lungcheck">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271000">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271000">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero lc-hero">
+    <div class="container">
+      <div class="card card--navy card--lg">
+        <div class="stack">
+          <span class="pill">Hear Your Lungs</span>
+          <h1 class="t-hero">How are your lungs today?</h1>
+          <p class="t-body" style="font-weight:500">A free 2-minute check of your breathing, your risks and the air where you live. Anonymous, no sign-up needed.</p>
+          <p class="t-body" style="font-weight:500;opacity:.85">Hundreds of millions of people live with a chronic lung disease such as COPD or asthma, and many don't know it yet. A lasting cough, wheezing or getting out of breath are easy to put down to age or fitness. Noticing them is the first step.</p>
+        </div>
+        <div class="lc-ring" aria-hidden="true">
+          <svg viewBox="0 0 240 240">
+            <defs><radialGradient id="lcg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#4da9ed" stop-opacity=".55"/><stop offset="1" stop-color="#4da9ed" stop-opacity="0"/></radialGradient></defs>
+            <circle class="lc-pulse" cx="120" cy="120" r="112" fill="url(#lcg)"/>
+            <circle class="lc-pulse2" cx="120" cy="120" r="92" fill="none" stroke="#4da9ed" stroke-opacity=".6" stroke-width="2"/>
+            <circle cx="120" cy="120" r="70" fill="#1f3d6b"/>
+            <path d="M120 78v34M120 100c-6 8-14 10-20 10M120 100c6 8 14 10 20 10" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M100 98c-14 4-22 26-20 44 1 10 9 12 16 8 8-5 12-20 12-36 0-10-3-17-8-16z" fill="#f88623"/>
+            <path d="M140 98c14 4 22 26 20 44-1 10-9 12-16 8-8-5-12-20-12-36 0-10 3-17 8-16z" fill="#f88623"/>
+            <text class="lc-say in" x="120" y="176" text-anchor="middle">breathe in</text>
+            <text class="lc-say out" x="120" y="176" text-anchor="middle">breathe out</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="lc" id="lung-check" aria-live="polite">
+        <noscript><p>The Lung Check needs JavaScript. Please enable it, or email <a href="mailto:info@galahealth.org">info@galahealth.org</a>.</p></noscript>
+      </div>
+      <p class="lc-note">This check raises awareness. It is not a medical diagnosis and does not replace a doctor. Air quality: <a href="https://open-meteo.com/" target="_blank" rel="noopener" style="text-decoration:underline">Open-Meteo</a> (CC BY 4.0), based on Copernicus Atmosphere Monitoring Service data.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split split--top">
+      <div class="stack">
+        <span class="pill">What's next</span>
+        <h2 class="t-h1" style="margin-top:24px">The breath test</h2>
+        <p class="t-body" style="margin-top:24px">We are developing an AI tool that listens to a short recording of your breathing, combines it with your answers and the air where you live, and tells you whether to see a doctor. Join the waitlist at the end of the check to be among the first to try it and, if you wish, to help train it with a recording.</p>
+        <p class="t-body" style="margin-top:20px">Clinics, NGOs and local health authorities can run the check with their communities. <a href="contact.html" style="text-decoration:underline">Get in touch</a>.</p>
+      </div>
+      <div class="stack faq">
+        <h2 class="t-h3">Questions</h2>
+        <details><summary>Is this a diagnosis?</summary><p>No. It flags risk factors and symptoms that are worth discussing with a doctor. Only a health professional can diagnose a lung condition, usually with a spirometry breathing test.</p></details>
+        <details><summary>What happens to my answers?</summary><p>They stay in your browser and are never sent to us. If you join the waitlist, we store only your email, role, country and consent.</p></details>
+        <details><summary>Where does the air data come from?</summary><p>From Open-Meteo, based on the European Copernicus Atmosphere Monitoring Service model. It is an estimate; local monitoring stations may read differently.</p></details>
+        <details><summary>Who is GALA Health?</summary><p>The Global Alliance for Lungs, Air and Health works to reduce the burden of chronic respiratory diseases, supporting health authorities to put policy into practice at county and community level. <a href="about.html" style="text-decoration:underline">About us</a>.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site.js?v=202611271000"></script>
+<script src="assets/lungcheck.js?v=202611271000"></script>
+</body>
+</html>

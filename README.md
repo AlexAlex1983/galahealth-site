@@ -49,3 +49,10 @@ change `www` back to an A record → 194.48.203.131, and delete the `CNAME` file
 - **Publications:** edit `data/publications.json` — `title`, `type` (e.g. "Policy Brief"), `date`, `file` (put PDFs in `publications/`).
 - news.galahealth.org now forwards to galahealth.org/news.html (and old article links to the matching page).
   Article bodies support light formatting: `## Heading`, lines starting with `- ` for bullet lists, `**bold**`, and `[link text](https://...)`.
+
+## Hear Your Lungs — Lung Check (Nov 2026)
+- Page: `lungcheck.html` (styles `assets/lungcheck.css`, logic `assets/lungcheck.js`). Promo bands on Home and Campaigns link to it.
+- Questions, scoring and result wording are at the top of `assets/lungcheck.js` (`Q`, `BANDS`, `AQI`).
+- Answers never leave the browser. Air quality comes from the Open-Meteo Air Quality API (free for non-profit sites without ads/subscriptions, CC BY 4.0; keep the credit line on the page).
+- Waitlist sign-ups post to `SITE.formEndpoint` with `form=lungcheck` and land in the "Lung Check waitlist" tab of the website-submissions sheet (no email notification).
+  After changing `backend/forms.gs`, paste it into the sheet's Apps Script and use **Deploy → Manage deployments → Edit → Version: New version** so the URL stays the same.
