@@ -4,7 +4,7 @@ name: Atlas data
 on:
   push:
     branches: [main]
-    paths: [scripts/build_atlas.py, .github/workflows/atlas-data.yml]
+    paths: [scripts/build_atlas.py, scripts/build_world.py, .github/workflows/atlas-data.yml]
   schedule:
     - cron: "17 3 1 * *"
   workflow_dispatch:
@@ -19,8 +19,9 @@ jobs:
         with:
           python-version: "3.11"
       - run: python scripts/build_atlas.py
+      - run: '[ -f data/world.json ] || python scripts/build_world.py'
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/atlas.json data/atlas-sources.json
+          git add data/atlas.json data/atlas-sources.json data/world.json
           git diff --cached --quiet || (git commit -m "Atlas data refresh" && git pull --rebase -q && git push)
