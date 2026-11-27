@@ -24,14 +24,10 @@ def get(url, tries=3):
 
 # key: (candidate OWID slugs, label, unit, source)
 OWID = {
-    "crd_death_rate": (["respiratory-disease-death-rate"], "Chronic respiratory disease death rate (age-standardised)", "per 100,000", "IHME Global Burden of Disease via Our World in Data"),
-    "crd_deaths": (["deaths-from-respiratory-disease"], "Deaths from chronic respiratory diseases", "deaths", "IHME Global Burden of Disease via Our World in Data"),
-    "crd_prevalence": (["share-of-population-with-chronic-respiratory-diseases", "chronic-respiratory-diseases-prevalence", "prevalence-of-chronic-respiratory-diseases"], "People living with a chronic respiratory disease", "% of population", "IHME Global Burden of Disease via Our World in Data"),
-    "copd_death_rate": (["copd-death-rate", "death-rate-from-copd", "chronic-obstructive-pulmonary-disease-death-rate"], "COPD death rate", "per 100,000", "IHME Global Burden of Disease via Our World in Data"),
-    "clean_fuels": (["access-to-clean-fuels-and-technologies-for-cooking", "share-of-the-population-with-access-to-clean-fuels-for-cooking"], "Population using clean fuels for cooking", "%", "WHO / World Bank via Our World in Data"),
+            "clean_fuels": (["access-to-clean-fuels-and-technologies-for-cooking", "share-of-the-population-with-access-to-clean-fuels-for-cooking"], "Population using clean fuels for cooking", "%", "WHO / World Bank via Our World in Data"),
     "pm25": (["pm25-air-pollution", "concentrations-of-fine-particulate-matter-pm25"], "Average PM2.5 exposure", "µg/m³", "World Bank / Brauer et al. via Our World in Data"),
     "smoking": (["share-of-adults-who-smoke", "share-of-adults-smoking"], "Adults who smoke tobacco", "%", "WHO via Our World in Data"),
-    "hap_death_rate": (["death-rate-from-indoor-air-pollution", "death-rate-household-air-pollution", "indoor-pollution-death-rate"], "Death rate from household air pollution", "per 100,000", "IHME Global Burden of Disease via Our World in Data"),
+    "hap_death_rate": (["death-rate-household-air-pollution"], "Death rate from household air pollution", "per 100,000", "IHME Global Burden of Disease via Our World in Data"),
     "population": (["population"], "Population", "people", "UN WPP via Our World in Data"),
 }
 
@@ -83,7 +79,7 @@ WB_AGE = ["3034", "3539", "4044", "4549", "5054", "5559", "6064", "6569", "7074"
 
 
 def wb(code):
-    txt = get(f"https://api.worldbank.org/v2/country/all/indicator/{code}?format=json&per_page=20000&mrnev=1")
+    txt = get(f"https://api.worldbank.org/v2/country/all/indicator/{code}?format=json&per_page=400&mrnev=1")
     out = {}
     try:
         for d in json.loads(txt)[1] or []:
@@ -155,12 +151,15 @@ def main():
         for iso, (v, yr) in data.items():
             if iso in countries:
                 countries[iso][key] = [round(v, 1), yr]
-    parts = [wb(f"SP.POP.{a}.{sx}.5Y") for a in WB_AGE for sx in ("MA", "FE")]
-    if all(parts):
-        isos = set.intersection(*[set(p) for p in parts])
+    # 5-year age groups are published as % of the male / female population, so weight by those totals
+    tot = {"MA": wb("SP.POP.TOTL.MA.IN"), "FE": wb("SP.POP.TOTL.FE.IN")}
+    parts = {sx: [wb(f"SP.POP.{a}.{sx}.5Y") for a in WB_AGE] for sx in ("MA", "FE")}
+    if all(tot.values()) and all(all(p) for p in parts.values()):
+        isos = set.intersection(*[set(p) for sx in parts for p in parts[sx]], set(tot["MA"]), set(tot["FE"]))
         for iso in isos:
             if iso in countries:
-                countries[iso]["pop_30_79"] = [round(sum(p[iso][0] for p in parts)), max(p[iso][1] for p in parts)]
+                n = sum(tot[sx][iso][0] * sum(p[iso][0] for p in parts[sx]) / 100 for sx in parts)
+                countries[iso]["pop_30_79"] = [round(n), max(p[iso][1] for sx in parts for p in parts[sx])]
         sources["pop_30_79"] = {"label": "Population aged 30–79", "unit": "people", "source": "World Bank (UN population estimates)",
                                 "url": "https://data.worldbank.org/indicator/SP.POP.TOTL", "years": []}
     else:
