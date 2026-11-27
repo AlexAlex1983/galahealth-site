@@ -111,7 +111,9 @@ def gho_data(code):
         iso, yr = d.get("SpatialDim"), d.get("TimeDim") or 0
         if (d.get("Dim1") or "") not in ("", "SEX_BTSX", "BTSX") and d.get("Dim1Type") == "SEX":
             continue
-        val = d.get("Value")
+        val = d.get("NumericValue")  # numeric indicators; "Value" is text like "12.0 [7.3-18.8]"
+        if val is None:
+            val = d.get("Value")
         if iso and val not in (None, "") and (iso not in out or yr > out[iso][1]):
             out[iso] = (val, yr)
     return out

@@ -20,12 +20,28 @@
   <link rel="stylesheet" href="assets/fonts/manrope.css">
   <link rel="stylesheet" href="assets/styles.css?v=202611271500">
   <link rel="stylesheet" href="assets/lungcheck.css?v=202611271000">
+  <link rel="stylesheet" href="assets/atlas.css?v=202611271600">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"NGO","name":"GALA Health","alternateName":"Global Alliance for Lungs, Air and Health","url":"https://galahealth.org/","logo":"https://galahealth.org/assets/img/tild3661-663-noroot.png","email":"info@galahealth.org","address":{"@type":"PostalAddress","streetAddress":"Rte de Meyrin 315","postalCode":"1217","addressLocality":"Meyrin","addressRegion":"Geneva","addressCountry":"CH"},"sameAs":["https://x.com/GALA_Health","https://www.linkedin.com/company/gala-health/"]}</script>
 </head>
 <body>
 <div id="site-header"></div>
 
 <main>
+  <!-- Lung Health Atlas preview (atlas.html) -->
+  <section class="atlas-home" style="padding-bottom:20px">
+    <div class="container">
+      <div class="card card--navy card--lg">
+        <div class="stack">
+          <span class="pill">Lung Health Atlas</span>
+          <h2 class="t-h1">Lung health, country by country</h2>
+          <p class="t-body" style="font-weight:500">Is spirometry available in primary care? Are inhalers on the shelves? How clean is the air? Explore WHO and other public data for every country, and see where action is needed most.</p>
+          <a class="btn btn--orange" href="atlas.html">Explore the atlas</a>
+        </div>
+        <div id="atlas-mini" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Hero -->
   <section class="home-hero">
     <div class="container">
@@ -211,6 +227,7 @@
 <script src="data/events.js?v=202611151438"></script>
 <script src="assets/site.js?v=202611271500"></script>
 <script src="assets/calendar.js?v=202611151438"></script>
+<script src="assets/atlas-mini.js?v=202611271610"></script>
 <script src="assets/news.js?v=202611151438"></script>
 </body>
 </html>

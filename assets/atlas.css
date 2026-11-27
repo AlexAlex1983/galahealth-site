@@ -48,3 +48,14 @@
   .atlas-tab { flex: none; }
   .atlas-search { max-width: none; }
 }
+
+/* Home-page atlas preview */
+.atlas-home .card { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 32px; align-items: center; padding: clamp(26px, 3.5vw, 48px); }
+.atlas-home .stack > * + * { margin-top: 18px; }
+.atlas-home .btn { margin-top: 26px; }
+#atlas-mini svg { display: block; width: 100%; height: auto; }
+#atlas-mini path { stroke: #152d53; stroke-width: .6; vector-effect: non-scaling-stroke; transition: opacity .15s; }
+#atlas-mini a:hover path { opacity: .75; }
+.atlas-mini-key { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; font-weight: 600; color: #d5e1f0; margin-top: 10px !important; }
+.atlas-mini-key i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 5px; }
+@media (max-width: 900px) { .atlas-home .card { grid-template-columns: minmax(0, 1fr); } }
