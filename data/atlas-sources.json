@@ -56,10 +56,32 @@
     2023
    ]
   },
+  "crd_death_rate_who": {
+   "label": "Chronic respiratory disease death rate (WHO Mortality Database, age-standardised)",
+   "unit": "per 100,000",
+   "source": "WHO Mortality Database via Our World in Data",
+   "column": "Age-standardized deaths that are from respiratory diseases per 100,000 people, in both sexes aged all ages",
+   "url": "https://ourworldindata.org/grapher/chronic-respiratory-diseases-death-rate-who-mdb",
+   "years": [
+    1987,
+    2024
+   ]
+  },
   "spirometry": {
+   "label": "General availability of spirometry at the primary health care level",
+   "unit": "",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_Spirom",
+   "code": "NCD_CCS_Spirom",
+   "years": [
+    2021,
+    2021
+   ]
+  },
+  "peak_flow": {
    "label": "General availability of peak flow measurement at the primary health care level",
    "unit": "",
-   "source": "WHO Global Health Observatory (NCD Country Capacity Survey)",
+   "source": "WHO Global Health Observatory",
    "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_PeakFlow",
    "code": "NCD_CCS_PeakFlow",
    "years": [
@@ -68,11 +90,22 @@
    ]
   },
   "crd_guidelines": {
-   "label": "Existence of evidence-based national guidelines/protocols/standards for the management of major NCDs through a primary care approach",
+   "label": "Existence of evidence-based national guidelines/protocols/standards for the management of chronic respiratory diseases",
    "unit": "",
-   "source": "WHO Global Health Observatory (NCD Country Capacity Survey)",
-   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_NCDGuide",
-   "code": "NCD_CCS_NCDGuide",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_CRD_GUIDE",
+   "code": "NCD_CCS_CRD_GUIDE",
+   "years": [
+    2021,
+    2021
+   ]
+  },
+  "crd_plan": {
+   "label": "Existence of operational policy/strategy/action plan for chronic respiratory diseases",
+   "unit": "",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_CRDPlan",
+   "code": "NCD_CCS_CRDPlan",
    "years": [
     2021,
     2021
@@ -81,7 +114,7 @@
   "ncd_plan": {
    "label": "Existence of an operational, multisectoral national NCD policy, strategy or action plan that integrates several NCDs and their risk factors",
    "unit": "",
-   "source": "WHO Global Health Observatory (NCD Country Capacity Survey)",
+   "source": "WHO Global Health Observatory",
    "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_integNCDplan",
    "code": "NCD_CCS_integNCDplan",
    "years": [
@@ -89,15 +122,48 @@
     2021
    ]
   },
-  "inhaled_meds": {
+  "bronchodilators": {
    "label": "General availability of bronchodilators in the public health sector",
    "unit": "",
-   "source": "WHO Global Health Observatory (NCD Country Capacity Survey)",
+   "source": "WHO Global Health Observatory",
    "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_Bronchodilators",
    "code": "NCD_CCS_Bronchodilators",
    "years": [
     2021,
     2021
+   ]
+  },
+  "steroid_inhalers": {
+   "label": "General availability of steroid inhalers in the public health sector",
+   "unit": "",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_Steroid",
+   "code": "NCD_CCS_Steroid",
+   "years": [
+    2021,
+    2021
+   ]
+  },
+  "combo_inhaler": {
+   "label": "General availability of combination budesonide formoterol inhaler in the public health sector",
+   "unit": "",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCD_CCS_ComboInhaler",
+   "code": "NCD_CCS_ComboInhaler",
+   "years": [
+    2021,
+    2021
+   ]
+  },
+  "ncd_premature": {
+   "label": "Probability (%) of dying between age 30 and exact age 70 from any of cardiovascular disease, cancer, diabetes, or chronic respiratory disease",
+   "unit": "%",
+   "source": "WHO Global Health Observatory",
+   "url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/NCDMORT3070",
+   "code": "NCDMORT3070",
+   "years": [
+    2023,
+    2023
    ]
   }
  },
@@ -133,89 +199,20 @@
  ],
  "gho_candidates": [
   {
-   "key": "spirometry",
-   "code": "NCD_CCS_PeakFlow",
-   "name": "General availability of peak flow measurement at the primary health care level"
-  },
-  {
-   "key": "spirometry",
-   "code": "NCD_CCS_Spirom",
-   "name": "General availability of spirometry at the primary health care level"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_NCDGuide",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of major NCDs through a primary care approach"
-  },
-  {
-   "key": "crd_guidelines",
    "code": "NCD_CCS_CRDPlan",
    "name": "Existence of operational policy/strategy/action plan for chronic respiratory diseases"
   },
   {
-   "key": "crd_guidelines",
    "code": "NCDMORT3070",
    "name": "Probability (%) of dying between age 30 and exact age 70 from any of cardiovascular disease, cancer, diabetes, or chronic respiratory disease"
   },
   {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_PA_MGMT_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of physical inactivity"
+   "code": "WHS4_106",
+   "name": "Care-seeking for children with symptoms of acute respiratory infection (%)"
   },
   {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_DIAB_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of diabetes"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_CANCER_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of cancer"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_ALC_MGMT_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of alcohol use disorders"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_CVD_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of cardiovascular diseases"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_TOB_MGMT_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of tobacco dependence"
-  },
-  {
-   "key": "crd_guidelines",
-   "code": "NCD_CCS_OBES_MGMT_GUIDE",
-   "name": "Existence of evidence-based national guidelines/protocols/standards for the management of overweight/obesity"
-  },
-  {
-   "key": "crd_guidelines",
    "code": "NCD_CCS_CRD_GUIDE",
    "name": "Existence of evidence-based national guidelines/protocols/standards for the management of chronic respiratory diseases"
-  },
-  {
-   "key": "ncd_plan",
-   "code": "NCD_CCS_integNCDplan",
-   "name": "Existence of an operational, multisectoral national NCD policy, strategy or action plan that integrates several NCDs and their risk factors"
-  },
-  {
-   "key": "inhaled_meds",
-   "code": "NCD_CCS_Bronchodilators",
-   "name": "General availability of bronchodilators in the public health sector"
-  },
-  {
-   "key": "inhaled_meds",
-   "code": "NCD_CCS_Steroid",
-   "name": "General availability of steroid inhalers in the public health sector"
-  },
-  {
-   "key": "inhaled_meds",
-   "code": "NCD_CCS_ComboInhaler",
-   "name": "General availability of combination budesonide formoterol inhaler in the public health sector"
   }
  ]
 }
