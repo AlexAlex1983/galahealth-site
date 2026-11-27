@@ -1,0 +1,26 @@
+# Refreshes data/atlas.json for the Lung Health Atlas from WHO / Our World in Data.
+# Runs when the build script changes, on the 1st of each month, or manually.
+name: Atlas data
+on:
+  push:
+    branches: [main]
+    paths: [scripts/build_atlas.py, .github/workflows/atlas-data.yml]
+  schedule:
+    - cron: "17 3 1 * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/build_atlas.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/atlas.json data/atlas-sources.json
+          git diff --cached --quiet || (git commit -m "Atlas data refresh" && git pull --rebase -q && git push)
