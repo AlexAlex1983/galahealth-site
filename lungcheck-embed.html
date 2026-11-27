@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>/* LC_LANG: ?lang=fr|es|ru */ (function(){var l=new URLSearchParams(location.search).get("lang");if(/^(fr|es|ru)$/.test(l))document.documentElement.lang=l;})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lung Check — GALA Health</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://galahealth.org/lungcheck">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271500">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271300">
+  <style>
+    body { background: transparent; }
+    .embed-wrap { padding: 4px; }
+    .embed-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 auto 14px; max-width: 880px; }
+    .embed-head h1 { font-size: clamp(22px, 4vw, 30px); color: var(--navy); }
+    .embed-foot { max-width: 880px; margin: 12px auto 0; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .embed-foot a { text-decoration: underline; }
+    .lc { box-shadow: none; }
+  </style>
+</head>
+<body>
+<div class="embed-wrap">
+  <div class="embed-head"><h1>How are your lungs today?</h1><span class="pill">Hear Your Lungs</span></div>
+  <div class="lc" id="lung-check" aria-live="polite"></div>
+  <div class="embed-foot">
+    <span>Awareness tool, not a diagnosis. Air quality: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> / Copernicus CAMS.</span>
+    <a href="https://galahealth.org/lungcheck" target="_blank" rel="noopener">Powered by GALA Health</a>
+  </div>
+</div>
+<script src="assets/site.js?v=202611271500"></script>
+<script src="assets/lungcheck-i18n.js?v=202611271400"></script>
+<script src="assets/lungcheck.js?v=202611271400"></script>
+<script>
+{ const H = {fr: 'Comment vont vos poumons aujourd’hui ?', es: '¿Cómo están sus pulmones hoy?', ru: 'Как ваши лёгкие сегодня?'};
+  const l = document.documentElement.lang; if (H[l]) document.querySelector('.embed-head h1').textContent = H[l]; }
+{ // tell the partner page how tall the check is, so its iframe can resize
+  const send = () => parent.postMessage({galaLungCheckHeight: document.documentElement.scrollHeight}, '*');
+  new ResizeObserver(send).observe(document.body); addEventListener('load', send);
+}
+</script>
+</body>
+</html>

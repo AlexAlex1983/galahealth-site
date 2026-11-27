@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COPD investment case calculator — GALA Health</title>
+  <meta name="description" content="Estimate how many people in a country live with undiagnosed COPD, what it takes to find them, and what a case-finding programme would cost.">
+  <meta property="og:title" content="COPD investment case calculator — GALA Health">
+  <meta property="og:description" content="How many people live with undiagnosed COPD in your country, and what would it take to find them?">
+  <meta property="og:url" content="https://galahealth.org/calculator">
+  <link rel="canonical" href="https://galahealth.org/calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GALA Health">
+  <meta property="og:image" content="https://galahealth.org/assets/img/og-calculator.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@GALA_Health">
+  <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271500">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271000">
+  <link rel="stylesheet" href="assets/calculator.css?v=202611271200">
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+  <section class="page-hero atlas-hero">
+    <div class="container">
+      <div class="card card--navy card--lg">
+        <div class="stack" style="max-width:900px">
+          <span class="pill">Investment case</span>
+          <h1 class="t-hero">Find the missing COPD patients</h1>
+          <p class="t-body" style="font-weight:500">About four in five people with COPD have never been diagnosed. Pick a country to see how many people that means, how many tests it would take to find them, and what a case-finding programme would cost. Every assumption is shown and can be changed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container calc">
+      <form class="calc-in" id="calc-form" onsubmit="return false">
+        <label for="c-country">Country</label>
+        <select id="c-country" class="lc-in"></select>
+
+        <label for="c-pop">Adults aged 30–79</label>
+        <input id="c-pop" class="lc-in" type="number" min="0" step="1000" inputmode="numeric">
+        <p class="calc-note" id="c-pop-src"></p>
+
+        <label for="c-prev">COPD prevalence, ages 30–79 <output id="o-prev"></output></label>
+        <input id="c-prev" type="range" min="3" max="20" step="0.1" value="10.3">
+        <p class="calc-note">Global estimate 10.3% (Adeloye et al., Lancet Respir Med 2022); regional averages range from 6.8% (Americas) to 11.7% (Western Pacific).</p>
+
+        <label for="c-undx">Share of COPD not yet diagnosed <output id="o-undx"></output></label>
+        <input id="c-undx" type="range" min="20" max="99" step="1" value="81">
+        <p class="calc-note">81% on average in population surveys at 44 sites in 27 countries (Lamprecht et al., Chest 2015).</p>
+
+        <label for="c-yield">New COPD found per person tested <output id="o-yield"></output></label>
+        <input id="c-yield" type="range" min="2" max="40" step="1" value="15">
+        <p class="calc-note">Testing symptomatic adults who smoke or smoked in primary care finds undiagnosed COPD in about 14–26% of them (systematic review, 2023). Broader screening finds fewer.</p>
+
+        <label for="c-share">Share of undiagnosed people to find in 5 years <output id="o-share"></output></label>
+        <input id="c-share" type="range" min="5" max="100" step="5" value="25">
+
+        <label for="c-cost">Cost per person tested (questionnaire + spirometry), US$</label>
+        <input id="c-cost" class="lc-in" type="number" min="0" step="0.5" value="10" inputmode="decimal">
+        <p class="calc-note">Example value. Replace it with the local cost of a spirometry test, including staff time.</p>
+      </form>
+
+      <div class="calc-out" aria-live="polite">
+        <h2 id="r-title">Results</h2>
+        <div class="calc-big"><b id="r-cases">–</b><span>people aged 30–79 living with COPD</span></div>
+        <div class="calc-big calc-big--accent"><b id="r-undx">–</b><span>of them not yet diagnosed</span></div>
+        <div class="calc-grid">
+          <div><b id="r-target">–</b><span>people to find in 5 years</span></div>
+          <div><b id="r-tests">–</b><span>people to test (about <i id="r-tests-yr">–</i> a year)</span></div>
+          <div><b id="r-cost">–</b><span>programme cost over 5 years</span></div>
+          <div><b id="r-per">–</b><span>cost per new diagnosis</span></div>
+        </div>
+        <p class="calc-ctx" id="r-ctx"></p>
+        <p class="calc-ctx">Earlier diagnosis lets people get inhalers, quit support, vaccination and pulmonary rehabilitation before the disease is advanced, and helps avoid emergency admissions. The programme pays for itself where each diagnosis avoids at least its cost per new diagnosis in later care.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <button class="btn btn--orange" type="button" id="r-copy">Copy summary</button>
+          <a class="btn" href="contact.html">Build a full case with us</a>
+        </div>
+        <p class="lc-small" id="r-msg" role="status" style="margin-top:8px"></p>
+      </div>
+    </div>
+    <div class="container"><p class="atlas-src" id="calc-src">Population and health spending: World Bank. Prevalence: <a href="https://doi.org/10.1016/S2213-2600(21)00511-7" target="_blank" rel="noopener">Adeloye et al., 2022</a>. Undiagnosed share: <a href="https://doi.org/10.1378/chest.14-2535" target="_blank" rel="noopener">Lamprecht et al., 2015</a>. Case-finding yield: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10186431/" target="_blank" rel="noopener">systematic review of primary-care studies, 2023</a>. Results are illustrative estimates for planning conversations, not national statistics.</p></div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/site.js?v=202611271500"></script>
+<script src="assets/calculator.js?v=202611271200"></script>
+</body>
+</html>

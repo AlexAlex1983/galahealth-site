@@ -369,3 +369,14 @@ figure.photo .credit {
 .article-body li + li { margin-top: .5em; }
 .article-body a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
 .article-body a:hover { color: var(--orange); }
+
+/* Footer with a Tools column (Nov 2026) */
+.site-footer .inner { grid-template-columns: 283px 1fr 1fr 1.2fr; }
+.site-footer nav a { margin-left: 60px; }
+.site-footer nav.footer-tools a { margin-left: 0; }
+@media (max-width: 1100px) {
+  .site-footer .inner { grid-template-columns: 1fr 1fr; }
+  .site-footer .inner .logo, .site-footer .inner .big { grid-column: 1 / -1; }
+  .site-footer nav a { margin-left: 0; }
+}
+@media (max-width: 600px) { .site-footer .inner { grid-template-columns: 1fr 1fr; gap: 24px; } .site-footer nav a { font-size: 16px; margin-bottom: 14px; } }

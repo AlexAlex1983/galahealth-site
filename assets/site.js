@@ -13,6 +13,9 @@ const SITE = {
   // To collect form submissions without email clients, create a free form at
   // https://formspree.io (or similar) and paste its endpoint URL here.
   // Leave empty to fall back to opening the visitor's email app.
+  // Privacy-friendly visitor counts (no cookies): sign up free at goatcounter.com and put your code here,
+  // e.g. "galahealth" for galahealth.goatcounter.com. Leave empty to turn analytics off.
+  goatcounter: "",
   formEndpoint: "https://script.google.com/macros/s/AKfycbxTuqAXYq-KRx-QnG0HQJZ0yoYoUcnAhyeAqg8uScAT3IfmTLxITxlGJmH885Jhtja7/exec",
 };
 
@@ -23,6 +26,14 @@ const NAV = [
   { label: "Campaigns", href: "campaigns.html" },
   { label: "News", href: "news.html" },
   { label: "Contact", href: "contact.html" },
+];
+const TOOLS = [
+  { label: "Lung Check", href: "lungcheck.html" },
+  { label: "Lung Health Atlas", href: "atlas.html" },
+  { label: "Investment case", href: "calculator.html" },
+  { label: "Voices", href: "voices.html" },
+  { label: "GALA Brief", href: "brief.html" },
+  { label: "For partners", href: "partners.html" },
 ];
 const FOCUS = [
   { label: "Country Support", href: "countrysupport.html" },
@@ -50,6 +61,7 @@ const FOCUS = [
       <div class="mobile-menu" id="mobile-menu">
         <a href="index.html">Home</a>
         ${NAV.map((n) => `<a href="${n.href}">${n.label}</a>${n.label === "Focus Areas" ? FOCUS.map((f) => `<a class="sub" href="${f.href}">${f.label}</a>`).join("") : ""}`).join("")}
+        <a href="lungcheck.html">Tools</a>${TOOLS.map((t) => `<a class="sub" href="${t.href}">${t.label}</a>`).join("")}
         <p style="margin-top:24px"><a class="btn" href="mailto:${SITE.email}" style="border:0">Get in Touch</a></p>
       </div>`;
     const burger = document.querySelector(".burger");
@@ -76,6 +88,9 @@ const FOCUS = [
             <a href="news.html">News</a>
             <a href="contact.html">Contact</a>
           </nav>
+          <nav aria-label="Tools" class="footer-tools">
+            ${TOOLS.map((t) => `<a href="${t.href}">${t.label}</a>`).join("")}
+          </nav>
           <div class="big">
             <a href="mailto:${SITE.email}">Email: ${SITE.email}</a>
             <p class="share-line">Share options: <a href="${SITE.x}" target="_blank" rel="noopener">X</a> · <a href="${SITE.linkedin}" target="_blank" rel="noopener">LinkedIn</a></p>
@@ -89,6 +104,13 @@ const FOCUS = [
           </div>
         </div>
       </footer>`;
+  }
+
+  if (SITE.goatcounter && !/embed/.test(page)) {
+    const gc = document.createElement("script");
+    gc.async = true; gc.src = "https://gc.zgo.at/count.js";
+    gc.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
+    document.head.appendChild(gc);
   }
 
   // Forms: <form data-gala-form="lead|newsletter"> -> Google Apps Script web app (writes to a Google Sheet + emails info@)

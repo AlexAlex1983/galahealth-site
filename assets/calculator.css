@@ -1,0 +1,20 @@
+/* COPD investment case calculator */
+.calc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
+.calc-in { display: grid; gap: 8px; background: #fff; border: 1px solid #e6e1da; border-radius: var(--radius-lg); padding: clamp(20px, 3vw, 36px); }
+.calc-in label { font-weight: 700; color: var(--navy); margin-top: 12px; display: flex; justify-content: space-between; gap: 10px; }
+.calc-in label output { color: var(--orange); font-weight: 800; white-space: nowrap; }
+.calc-in input[type=range] { width: 100%; accent-color: var(--orange); min-height: 32px; }
+.calc-note { font-size: 13px; color: var(--muted); }
+.calc-out { position: sticky; top: 116px; background: var(--navy); color: #fff; border-radius: var(--radius-lg); padding: clamp(22px, 3vw, 40px); }
+.calc-out h2 { font-size: clamp(24px, 2.6vw, 32px); }
+.calc-big { margin-top: 18px; }
+.calc-big b { display: block; font-size: clamp(38px, 5vw, 60px); line-height: 1; font-weight: 800; white-space: nowrap; }
+.calc-big span, .calc-grid span { color: #d5e1f0; font-weight: 500; }
+.calc-big--accent b { color: var(--orange); }
+.calc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.calc-grid div { background: rgba(255,255,255,.08); border-radius: 16px; padding: 14px 16px; }
+.calc-grid b { display: block; font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; white-space: nowrap; }
+.calc-grid i { font-style: normal; }
+.calc-ctx { margin-top: 16px !important; color: #d5e1f0; font-size: 15px; }
+@media (max-width: 900px) { .calc { grid-template-columns: minmax(0, 1fr); } .calc-out { position: static; order: -1; } }
+@media (max-width: 420px) { .calc-grid { grid-template-columns: minmax(0, 1fr); } }

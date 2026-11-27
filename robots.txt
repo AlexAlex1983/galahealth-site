@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /lungcheck-embed.html
+
+Sitemap: https://galahealth.org/sitemap.xml

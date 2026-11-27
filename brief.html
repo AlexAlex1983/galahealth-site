@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GALA Brief — monthly lung health update — GALA Health</title>
+  <meta name="description" content="GALA Health's monthly brief: our news, the month's lung health awareness days, a country in focus from the Lung Health Atlas, and our tools.">
+  <meta property="og:title" content="GALA Brief — monthly lung health update">
+  <meta property="og:url" content="https://galahealth.org/brief">
+  <link rel="canonical" href="https://galahealth.org/brief">
+  <meta property="og:description" content="GALA Health's monthly brief: our news, the month's lung health awareness days, a country in focus from the Lung Health Atlas, and our tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GALA Health">
+  <meta property="og:image" content="https://galahealth.org/assets/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@GALA_Health">
+  <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271500">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271300">
+  <style>
+    .br { max-width: 900px; margin-inline: auto; }
+    .br section { margin-top: 44px; }
+    .br h2 { color: var(--navy); font-size: clamp(24px, 3vw, 32px); margin-bottom: 14px; }
+    .br-item { border-bottom: 1px solid #eee; padding: 16px 0; }
+    .br-item h3 { font-size: 19px; color: var(--navy); }
+    .br-item p { margin-top: 6px; }
+    .br-item small { color: var(--muted); font-weight: 600; }
+    .br-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .br-tools a { background: var(--cream); border-radius: var(--radius); padding: 20px; display: block; }
+    .br-tools b { color: var(--navy); font-size: 18px; display: block; }
+    .br-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 40px; flex-wrap: wrap; }
+    .br-focus { background: var(--navy); color: #fff; border-radius: var(--radius); padding: clamp(20px, 3vw, 32px); }
+    .br-focus h3 { font-size: 26px; }
+    .br-focus ul { margin: 12px 0 0; padding-left: 20px; color: #d5e1f0; }
+    .br-focus a { color: #9fd0f6; text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="card card--navy card--lg" style="grid-template-columns:1fr">
+        <div class="stack" style="max-width:900px">
+          <span class="pill">GALA Brief</span>
+          <h1 class="t-hero" id="br-title">GALA Brief</h1>
+          <p class="t-body" style="font-weight:500">Our monthly update on lung health: what we published, the awareness days ahead, one country in focus, and tools you can use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container br section--tight" id="brief"><p>Loading…</p></div>
+  <section class="section--tight">
+    <div class="container br">
+      <div class="lc">
+        <h2 class="lc-q">Get the GALA Brief by email</h2>
+        <p class="lc-hint">Once a month. Unsubscribe any time.</p>
+        <form data-gala-form="newsletter" class="lc-row">
+          <input class="lc-in" type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email">
+          <button class="btn btn--orange" type="submit">Subscribe</button>
+        </form>
+        <p class="form-msg lc-small" aria-live="polite" style="margin-top:8px"></p>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="data/events.js?v=202611271400"></script>
+<script src="assets/site.js?v=202611271500"></script>
+<script>
+{
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const WD = {Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6};
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const now = new Date();
+  const q = new URLSearchParams(location.search).get('m');
+  let [Y, M] = q && /^\d{4}-\d{2}$/.test(q) ? q.split('-').map(Number) : [now.getFullYear(), now.getMonth() + 1];
+  const key = (y, m) => `${y}-${String(m).padStart(2, '0')}`;
+  const prev = M === 1 ? [Y - 1, 12] : [Y, M - 1], next = M === 12 ? [Y + 1, 1] : [Y, M + 1];
+  document.getElementById('br-title').textContent = `GALA Brief — ${MONTHS[M - 1]} ${Y}`;
+  document.title = `GALA Brief — ${MONTHS[M - 1]} ${Y} — GALA Health`;
+
+  function occurrence(d, year) {
+    const m = d.month - 1;
+    if (d.wholeMonth) return new Date(year, m, 1);
+    if (d.day) return new Date(year, m, d.day);
+    let x;
+    if (d.nth > 0) { x = new Date(year, m, 1); x.setDate(1 + ((WD[d.weekday] - x.getDay() + 7) % 7) + (d.nth - 1) * 7); }
+    else { x = new Date(year, m + 1, 0); x.setDate(x.getDate() - ((x.getDay() - WD[d.weekday] + 7) % 7)); }
+    return x;
+  }
+
+  Promise.all([fetch('data/news.json').then(r => r.json()).catch(() => []), fetch('data/atlas.json').then(r => r.json()).catch(() => null)]).then(([news, atlas]) => {
+    const pk = key(...prev);
+    const inNews = news.filter(n => (n.date || '').startsWith(pk) || (n.date || '').startsWith(key(Y, M)) && new Date(n.date) <= now)
+      .sort((a, b) => b.date.localeCompare(a.date));
+    const events = (window.GALA_EVENTS || []).filter(e => e.date.month === M).map(e => ({...e, d: occurrence(e.date, Y)})).sort((a, b) => a.d - b.d);
+
+    // Country in focus: rotates monthly through populous countries with WHO survey data
+    let focus = '';
+    if (atlas) {
+      const pool = Object.entries(atlas.countries).filter(([, c]) => c.spirometry && c.population && c.population[0] > 5e6).sort((a, b) => a[0].localeCompare(b[0]));
+      const [iso, c] = pool[(Y * 12 + M * 7) % pool.length];
+      const yn = k => c[k] ? (/^(yes|generally)/i.test(c[k][0]) ? 'yes' : /^no/i.test(c[k][0]) ? 'no' : 'not reported') : 'no data';
+      const li = [];
+      if (c.clean_fuels) li.push(`${Math.round(c.clean_fuels[0])}% of people rely on clean cooking fuels (${c.clean_fuels[1]})`);
+      if (c.pm25) li.push(`Average PM2.5 exposure ${c.pm25[0].toFixed(1)} µg/m³, against a WHO guideline of 5 (${c.pm25[1]})`);
+      if (c.smoking) li.push(`${Math.round(c.smoking[0])}% of adults use tobacco (${c.smoking[1]})`);
+      li.push(`Spirometry generally available in primary care: ${yn('spirometry')}; operational plan for chronic respiratory diseases: ${yn('crd_plan')} (WHO survey ${c.spirometry[1]})`);
+      focus = `<section><h2>Country in focus</h2><div class="br-focus"><h3>${esc(c.name)}</h3><ul>${li.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <p style="margin-top:14px"><a href="atlas.html#${esc(iso)}">Full profile in the Lung Health Atlas</a> · <a href="calculator.html#${esc(iso)}">Investment case</a></p></div></section>`;
+    }
+
+    document.getElementById('brief').innerHTML = `
+      <section style="margin-top:0"><h2>From GALA Health</h2>${inNews.length ? inNews.map(n => `<div class="br-item"><small>${esc(new Date(n.date).toLocaleDateString('en-GB', {day: 'numeric', month: 'long'}))}</small><h3><a href="article.html?p=${encodeURIComponent(n.slug || '')}">${esc(n.title)}</a></h3><p>${esc(n.summary)}</p></div>`).join('')
+        : '<p>No new articles this month. Browse <a href="news.html" style="text-decoration:underline">all news</a>.</p>'}</section>
+      <section><h2>Awareness days in ${MONTHS[M - 1]}</h2>${events.length ? events.map(e => `<div class="br-item"><small>${e.date.wholeMonth ? 'All month' : esc(e.d.toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long'}))}</small><h3><a href="campaigns.html#${esc(e.id)}">${esc(e.name)}</a></h3><p>${esc(e.message)}</p></div>`).join('')
+        : '<p>No major lung health days this month. See the <a href="campaigns.html" style="text-decoration:underline">full calendar</a>.</p>'}</section>
+      ${focus}
+      <section><h2>Tools you can use</h2><div class="br-tools">
+        <a href="lungcheck.html"><b>Lung Check</b>A free 2-minute check of your breathing and local air.</a>
+        <a href="atlas.html"><b>Lung Health Atlas</b>Country-by-country data for decision makers.</a>
+        <a href="calculator.html"><b>Investment case</b>How many people live with undiagnosed COPD, and what it takes to find them.</a>
+        <a href="voices.html"><b>Voices</b>Share what living with lung disease is like.</a>
+      </div></section>
+      <div class="br-nav"><a class="btn" style="background:#fff;color:var(--navy);box-shadow:inset 0 0 0 2px #dfe5ee" href="?m=${key(...prev)}">← ${MONTHS[prev[1] - 1]} ${prev[0]}</a>${new Date(next[0], next[1] - 1, 1) <= now ? `<a class="btn" style="background:#fff;color:var(--navy);box-shadow:inset 0 0 0 2px #dfe5ee" href="?m=${key(...next)}">${MONTHS[next[1] - 1]} ${next[0]} →</a>` : ''}</div>`;
+  });
+}
+</script>
+</body>
+</html>

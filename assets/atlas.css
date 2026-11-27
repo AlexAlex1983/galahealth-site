@@ -41,3 +41,10 @@
 .atlas-src { font-size: 13px; color: var(--muted); margin-top: 24px; }
 .atlas-src a { text-decoration: underline; }
 @media (max-width: 900px) { .atlas-grid { grid-template-columns: minmax(0, 1fr); } .atlas-search { margin-left: 0; flex-basis: 100%; } }
+.atlas-search { order: -1; margin-left: 0; flex: 1 1 100%; max-width: 360px; }
+.atlas-more { margin-top: 14px; }
+@media (max-width: 700px) {
+  .atlas-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); width: calc(100% + 2 * var(--gutter)); }
+  .atlas-tab { flex: none; }
+  .atlas-search { max-width: none; }
+}

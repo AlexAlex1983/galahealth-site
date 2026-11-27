@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voices: living with lung disease — GALA Health</title>
+  <meta name="description" content="Stories from people living with chronic respiratory disease, their caregivers and the health workers who support them. Share yours.">
+  <meta property="og:title" content="Voices: living with lung disease">
+  <meta property="og:url" content="https://galahealth.org/voices">
+  <link rel="canonical" href="https://galahealth.org/voices">
+  <meta property="og:description" content="Stories from people living with chronic respiratory disease, their caregivers and the health workers who support them. Share yours.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GALA Health">
+  <meta property="og:image" content="https://galahealth.org/assets/img/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@GALA_Health">
+  <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271500">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271300">
+  <style>
+    .v-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .v-card { background: var(--cream); border-radius: var(--radius); padding: clamp(22px, 3vw, 32px); }
+    .v-card blockquote { margin: 0; font-size: 18px; line-height: 1.5; }
+    .v-card p.who { margin-top: 16px; font-weight: 700; color: var(--navy); }
+    .v-card p.role { color: var(--muted); font-size: 14px; }
+    .v-empty { background: var(--cream); border-radius: var(--radius); padding: 30px; }
+    .v-form { display: grid; gap: 10px; }
+    .v-form label { font-weight: 700; color: var(--navy); margin-top: 6px; }
+    .v-form textarea { min-height: 180px; resize: vertical; font: 500 16px/1.5 var(--font); }
+    .v-form .lc-check { color: #000; font-weight: 500; }
+    .v-form .lc-check input { accent-color: var(--navy); }
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="card card--navy card--lg" style="grid-template-columns:1fr">
+        <div class="stack" style="max-width:900px">
+          <span class="pill">Voices</span>
+          <h1 class="t-hero">Living with lung disease, in people's own words</h1>
+          <p class="t-body" style="font-weight:500">Behind every statistic is someone catching their breath, and often a family member who cares for them. We share these stories, with permission, so that policy makers hear them too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="v-grid" id="voices"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split split--top">
+      <div class="stack">
+        <span class="pill">Share your story</span>
+        <h2 class="t-h1" style="margin-top:24px">Tell us what it is like</h2>
+        <p class="t-body" style="margin-top:24px">Do you live with asthma, COPD or another long-term lung condition? Do you care for someone who does, or treat them? Tell us what helped, what got in the way, and what you wish decision makers understood.</p>
+        <p class="t-body" style="margin-top:16px">We read every story. We publish only with your permission, and we contact you first to agree the wording and how you want to be named.</p>
+      </div>
+      <div class="lc">
+        <form class="v-form" id="v-form" novalidate>
+          <label for="v-name">Your name <span class="lc-small">(or how you'd like to be named)</span></label>
+          <input id="v-name" name="name" class="lc-in" autocomplete="name">
+          <label for="v-email">Email <span class="lc-small">(so we can check the story with you; never published)</span></label>
+          <input id="v-email" name="email" type="email" class="lc-in" autocomplete="email" required>
+          <label for="v-country">Country</label>
+          <input id="v-country" name="country" class="lc-in" autocomplete="country-name">
+          <label for="v-role">I am</label>
+          <select id="v-role" name="role" class="lc-in">
+            <option>Living with a lung condition</option><option>A caregiver or family member</option><option>A doctor, nurse or health worker</option><option>Other</option>
+          </select>
+          <label for="v-story">Your story</label>
+          <textarea id="v-story" name="story" class="lc-in" maxlength="3000" required placeholder="What happened, what helped, what you wish had been different"></textarea>
+          <label class="lc-check"><input type="checkbox" id="v-ok" required><span>I agree that GALA Health may store my story and contact me about it. Nothing is published without my further approval. <a href="privacy.html#voices" style="text-decoration:underline">Privacy Policy</a></span></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button class="btn btn--orange" type="submit">Send my story</button>
+          <p class="lc-small" id="v-msg" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/site.js?v=202611271500"></script>
+<script>
+{
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  fetch('data/voices.json').then(r => r.json()).then(list => {
+    const box = document.getElementById('voices');
+    box.innerHTML = list.length ? list.map(v => `<article class="v-card"><blockquote>${esc(v.quote)}</blockquote><p class="who">${esc(v.name)}${v.country ? ', ' + esc(v.country) : ''}</p><p class="role">${esc(v.role)}</p>${v.story ? `<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">Read the full story</summary>${String(v.story).split(/\n\n+/).map(p => `<p style="margin-top:10px">${esc(p)}</p>`).join('')}</details>` : ''}</article>`).join('')
+      : `<div class="v-empty"><h2 class="t-h3" style="color:var(--navy)">The first stories are on their way</h2><p style="margin-top:10px">We are collecting stories from people living with lung disease, caregivers and health workers. Be among the first to share yours below.</p></div>`;
+  }).catch(() => {});
+  const f = document.getElementById('v-form'), m = document.getElementById('v-msg');
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) { m.textContent = 'Please enter a valid email.'; return; }
+    if (f.story.value.trim().length < 30) { m.textContent = 'Please tell us a little more.'; return; }
+    if (!document.getElementById('v-ok').checked) { m.textContent = 'Please tick the consent box.'; return; }
+    const data = new URLSearchParams(new FormData(f)); data.set('form', 'voices'); data.set('consent', 'yes'); data.set('page', location.pathname);
+    const b = f.querySelector('button'); b.disabled = true;
+    try {
+      await fetch(SITE.formEndpoint, {method: 'POST', mode: 'no-cors', body: data});
+      f.innerHTML = '<p style="font-size:18px"><b>Thank you for sharing your story.</b> We will read it carefully and contact you before anything is published.</p>';
+    } catch (err) { m.textContent = 'Something went wrong. Please email info@galahealth.org.'; b.disabled = false; }
+  });
+}
+</script>
+</body>
+</html>

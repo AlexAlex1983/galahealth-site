@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lung Health Atlas — GALA Health</title>
+  <meta name="description" content="Country-by-country data on chronic respiratory disease, air pollution, tobacco and lung-care readiness, from WHO and other public sources.">
+  <meta property="og:title" content="Lung Health Atlas — GALA Health">
+  <meta property="og:description" content="Chronic respiratory disease, air pollution and lung-care readiness, country by country.">
+  <meta property="og:url" content="https://galahealth.org/atlas">
+  <link rel="canonical" href="https://galahealth.org/atlas">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GALA Health">
+  <meta property="og:image" content="https://galahealth.org/assets/img/og-atlas.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@GALA_Health">
+  <link rel="icon" href="assets/img/tild3131-626-Frame_2043683567.png">
+  <link rel="stylesheet" href="assets/fonts/manrope.css">
+  <link rel="stylesheet" href="assets/styles.css?v=202611271500">
+  <link rel="stylesheet" href="assets/lungcheck.css?v=202611271000">
+  <link rel="stylesheet" href="assets/atlas.css?v=202611271100">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero atlas-hero">
+    <div class="container">
+      <div class="card card--navy card--lg">
+        <div class="stack" style="max-width:900px">
+          <span class="pill">Lung Health Atlas</span>
+          <h1 class="t-hero">Lung health, country by country</h1>
+          <p class="t-body" style="font-weight:500">Where chronic respiratory diseases take the heaviest toll, what drives them, and whether health systems are ready to diagnose and treat them. Built from WHO and other public data, for decision makers, journalists and partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight" id="atlas-top">
+    <div class="container">
+      <div class="atlas-bar">
+        <div class="atlas-tabs" id="atlas-tabs" role="group" aria-label="Indicator"></div>
+        <div class="atlas-search">
+          <label for="atlas-q" class="sr-only" style="position:absolute;left:-9999px">Find a country</label>
+          <input id="atlas-q" type="search" placeholder="Find a country" autocomplete="off">
+          <ul id="atlas-results" hidden></ul>
+        </div>
+      </div>
+      <div class="atlas-grid">
+        <div class="atlas-map">
+          <svg id="atlas-svg" viewBox="0 0 975 480" role="img" aria-label="World map of the selected indicator"></svg>
+          <div class="atlas-tip" id="atlas-tip" hidden></div>
+          <div class="atlas-legend" id="atlas-legend"></div>
+          <p class="atlas-def" id="atlas-def"></p>
+        </div>
+        <aside class="atlas-card" id="atlas-profile" aria-live="polite"><p>Loading the atlas…</p></aside>
+      </div>
+
+      <h2 class="t-h3" style="margin-top:50px;color:var(--navy)">All countries <small id="atlas-count" style="font-size:14px;color:var(--muted);font-weight:600"></small></h2>
+      <div class="atlas-table-wrap"><table class="atlas-table" id="atlas-table"></table></div>
+      <button class="btn btn--ghost atlas-more" id="atlas-more" type="button" style="background:#fff;color:var(--navy);box-shadow:inset 0 0 0 2px #dfe5ee" hidden></button>
+      <p class="atlas-src" id="atlas-sources"></p>
+    </div>
+  </section>
+
+  <section class="section--tight promo-band">
+    <div class="container">
+      <div class="card card--navy card--lg">
+        <div class="stack">
+          <span class="pill">Country support</span>
+          <h2 class="t-h1">Turn the numbers into a plan</h2>
+          <p class="t-body" style="font-weight:500">GALA Health helps ministries and local authorities build the case for lung health and put policy into practice, from spirometry in primary care to clean-air and clean-cooking measures.</p>
+        </div>
+        <a class="btn btn--orange" href="contact.html">Talk to us</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site.js?v=202611271500"></script>
+<script src="assets/atlas.js?v=202611271100"></script>
+</body>
+</html>
