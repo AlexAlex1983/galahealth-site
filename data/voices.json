@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "type": "curated",
+    "name": "Revaz Vachnadze", "country": "Georgia", "role": "Living with COPD",
+    "headline": "Years of symptoms before anyone checked his lungs",
+    "summary": "Revaz smoked heavily for many years and went about a decade without treatment before he was finally diagnosed with COPD. He now calls for earlier diagnosis and for doctors to look at the whole person, not just their own speciality.",
+    "quote": "If they had checked my lungs sooner",
+    "source": "WHO Regional Office for Europe, June 2025",
+    "url": "https://www.who.int/europe/news-room/feature-stories/item/if-they-had-checked-my-lungs-sooner---revaz-vachnadze-s-story-of-living-with-chronic-obstructive-pulmonary-disease-is-a-call-to-action"
+  },
+  {
+    "type": "curated",
+    "name": "Jadhav", "country": "India", "role": "Living with COPD, never smoked",
+    "headline": "COPD from a lifetime of cooking over an open fire",
+    "summary": "Living on the outskirts of Nagpur, Jadhav has never smoked, yet one of her lungs is severely damaged. Her family has always cooked and heated water on wood or coal, with no access to clean cooking fuel.",
+    "quote": "My lungs have become useless by cooking food on the open stove",
+    "source": "People's Archive of Rural India",
+    "url": "https://ruralindiaonline.org/article/in-the-chokehold-of-a-wood-fired-stove"
+  },
+  {
+    "type": "curated",
+    "name": "Elina", "country": "", "role": "Diagnosed with emphysema at 26",
+    "headline": "A COPD diagnosis in her twenties",
+    "summary": "Elina was 26 when she learned she had emphysema, a form of COPD. She shares her story so that others with symptoms seek medical advice and keep pushing, because getting a diagnosis can take a long time.",
+    "quote": "People don’t understand what a lung condition can take away from you",
+    "source": "Asthma + Lung UK",
+    "url": "https://www.asthmaandlung.org.uk/blog/your-stories/people-dont-understand-what-lung-condition-can-take-away-you-elinas-story"
+  },
+  {
+    "type": "curated",
+    "name": "Mascha van Oers", "country": "", "role": "Living with severe COPD",
+    "headline": "Speaking up for patients with a fifth of her lung capacity",
+    "summary": "Mascha lives with very severe COPD. Ahead of World COPD Day she spoke about how she learned of her diagnosis and why awareness and patient voices matter, including in training for health professionals.",
+    "quote": "I have COPD GOLD 4 with a lung capacity of about 20%.",
+    "source": "European Lung Foundation, November 2025",
+    "url": "https://europeanlung.org/en/?p=90780"
+  },
+  {
+    "type": "curated",
+    "name": "Ian", "country": "", "role": "Living with COPD, volunteer",
+    "headline": "From competitive sport to pulmonary rehabilitation",
+    "summary": "Ian was an active handyman who played competitive sport into his forties. More than 12 years after his COPD diagnosis, he goes to an exercise class twice a week and volunteers to help others recognise their symptoms.",
+    "quote": "Living with COPD is a day-to-day proposition.",
+    "source": "Lung Foundation Australia",
+    "url": "https://lungfoundation.com.au/?p=402"
+  },
+  {
+    "type": "curated",
+    "name": "Sheryl Jones", "country": "", "role": "Living with asthma and emphysema",
+    "headline": "Support from specialist nurses changed how she lives with emphysema",
+    "summary": "Sheryl, 67, has had severe asthma all her life and was later diagnosed with emphysema. After a frightening collapse, specialist nurses gave her practical advice and emotional support, and she now feels far less stressed about managing her symptoms.",
+    "quote": "The nurses taught me ways to live with emphysema.",
+    "source": "Lung Foundation Australia",
+    "url": "https://lungfoundation.com.au/?p=105835"
+  },
+  {
+    "type": "curated",
+    "name": "Barbara", "country": "", "role": "Living with bronchiectasis and COPD",
+    "headline": "Finding people who understand",
+    "summary": "Living with bronchiectasis and COPD, Barbara felt alone until an online search led her to a patient organisation. Webinars and support groups connected her with others in the same situation and changed her outlook.",
+    "quote": "Before Lung Foundation Australia, I didn’t know a single person with my condition",
+    "source": "Lung Foundation Australia",
+    "url": "https://lungfoundation.com.au/?p=96712"
+  }
+]

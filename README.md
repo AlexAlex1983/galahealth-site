@@ -63,7 +63,7 @@ change `www` back to an A record → 194.48.203.131, and delete the `CNAME` file
 | `atlas.html` | Lung Health Atlas: world map + country profiles | `data/atlas.json`, `data/world.json`, refreshed monthly by `.github/workflows/atlas-data.yml` (`scripts/build_atlas.py`, `scripts/build_world.py`) from WHO GHO, World Bank, Our World in Data, Natural Earth |
 | `calculator.html` | COPD investment case (undiagnosed COPD, tests needed, programme cost) | World Bank population 30–79 and health spending from `data/atlas.json`; evidence defaults cited on the page |
 | `partners.html`, `lungcheck-embed.html` | Partners get a tracked link (`?partner=`) and iframe code; `?lang=fr|es|ru` for other languages | — |
-| `voices.html` | Patient / caregiver / health-worker stories + submission form | Publish approved stories by adding to `data/voices.json`: `[{"quote": "...", "name": "...", "country": "...", "role": "...", "story": "optional full text"}]` |
+| `voices.html` | Patient / caregiver / health-worker stories + submission form | Publish approved stories by adding to `data/voices.json`: `{"quote": "...", "name": "...", "country": "...", "role": "...", "story": "optional full text"}`. Entries with `"type": "curated"` are summaries of stories published elsewhere (fields `headline`, `summary`, `quote`, `source`, `url`) |
 | `brief.html` | Monthly GALA Brief (`brief.html?m=2026-12`): month's news, awareness days, country in focus, tools | `data/news.json`, `data/events.js`, `data/atlas.json` |
 | `lungcheck-fr/es/ru.html` | Lung Check in French, Spanish, Russian | Strings in `assets/lungcheck-i18n.js` |
 
