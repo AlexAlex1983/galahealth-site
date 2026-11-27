@@ -74,6 +74,27 @@ GHO_CODES = {
 EXTRA_OWID_WHO = {
     "crd_death_rate_who": (["chronic-respiratory-diseases-death-rate-who-mdb"], "Chronic respiratory disease death rate (WHO Mortality Database, age-standardised)", "per 100,000", "WHO Mortality Database via Our World in Data"),
 }
+# World Bank indicators for the investment-case calculator
+WB = {
+    "che_pc": ("SH.XPD.CHEX.PC.CD", "Current health expenditure per capita", "US$"),
+    "gdp_pc": ("NY.GDP.PCAP.CD", "GDP per capita", "US$"),
+}
+WB_AGE = ["3034", "3539", "4044", "4549", "5054", "5559", "6064", "6569", "7074", "7579"]
+
+
+def wb(code):
+    txt = get(f"https://api.worldbank.org/v2/country/all/indicator/{code}?format=json&per_page=20000&mrnev=1")
+    out = {}
+    try:
+        for d in json.loads(txt)[1] or []:
+            iso = d.get("countryiso3code")
+            if iso and d.get("value") is not None:
+                out[iso] = (float(d["value"]), int(d["date"]))
+    except Exception as e:
+        print(f"  ! World Bank {code}: {e}", file=sys.stderr)
+    return out
+
+
 CATALOGUE_WORDS = ["respiratory", "copd", "asthma", "obstructive pulmonary", "lung"]
 
 
@@ -123,6 +144,27 @@ def main():
                         "url": f"https://ourworldindata.org/grapher/{slug}", "years": [years[0], years[-1]]}
         for iso, (v, yr, name) in data.items():
             countries.setdefault(iso, {"name": name})[key] = [round(v, 3), yr]
+
+    for key, (code, label, unit) in WB.items():
+        data = wb(code)
+        if not data:
+            missing.append({"key": key, "code": code}); continue
+        years = sorted({y for _, y in data.values()})
+        sources[key] = {"label": label, "unit": unit, "source": "World Bank", "code": code,
+                        "url": f"https://data.worldbank.org/indicator/{code}", "years": [years[0], years[-1]]}
+        for iso, (v, yr) in data.items():
+            if iso in countries:
+                countries[iso][key] = [round(v, 1), yr]
+    parts = [wb(f"SP.POP.{a}.{sx}.5Y") for a in WB_AGE for sx in ("MA", "FE")]
+    if all(parts):
+        isos = set.intersection(*[set(p) for p in parts])
+        for iso in isos:
+            if iso in countries:
+                countries[iso]["pop_30_79"] = [round(sum(p[iso][0] for p in parts)), max(p[iso][1] for p in parts)]
+        sources["pop_30_79"] = {"label": "Population aged 30–79", "unit": "people", "source": "World Bank (UN population estimates)",
+                                "url": "https://data.worldbank.org/indicator/SP.POP.TOTL", "years": []}
+    else:
+        missing.append({"key": "pop_30_79"})
 
     inds = gho_indicators()
     names = {i["IndicatorCode"]: i["IndicatorName"] for i in inds}
