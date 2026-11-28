@@ -47,7 +47,7 @@ fr: {
   pm: 'Particules fines (PM2,5) : {v}', pmOver: ', soit environ {x} fois la valeur guide de l’OMS sur 24 heures', pmOk: ', sous la valeur guide de l’OMS sur 24 heures',
   model: 'Estimation par modèle (Copernicus CAMS via Open-Meteo). Les stations de mesure locales peuvent indiquer des valeurs différentes.',
   shareTitle: 'Invitez vos proches à faire le test', shareText: 'Partagez la carte. Elle montre que vous avez fait le test et l’air de votre ville, pas vos réponses.',
-  save: 'Enregistrer l’image', copy: 'Copier le lien', copied: 'Lien copié.', saved: 'Image enregistrée. Publiez-la avec {tag}', saveBlocked: 'L’enregistrement est bloqué ici. Faites plutôt une capture d’écran de la carte.',
+  save: 'Enregistrer l’image', copy: 'Copier le message', copied: 'Texte copié. Collez-le où vous voulez.', saved: 'Image enregistrée. Publiez-la avec {tag}', saveBlocked: 'L’enregistrement est bloqué ici. Faites plutôt une capture d’écran de la carte.',
   waitTitle: 'Bientôt : le test respiratoire', waitText: 'Nous développons un outil d’IA qui écoute votre respiration grâce au micro de votre téléphone. Rejoignez la liste d’attente pour l’essayer en premier.',
   email: 'E-mail', iam: 'Je suis', country: 'Pays', donate: 'Je souhaite aider à entraîner le test en donnant plus tard un court enregistrement de ma respiration.',
   consent: 'J’accepte que GALA Health m’envoie des e-mails sur le test et le test respiratoire. Je peux me désinscrire à tout moment.', privacy: 'Politique de confidentialité',
@@ -55,7 +55,8 @@ fr: {
   badEmail: 'Veuillez saisir une adresse e-mail valide.', tick: 'Veuillez cocher la case de consentement.', notConnected: 'La liste d’attente n’est pas encore connectée. Écrivez à info@galahealth.org.',
   error: 'Une erreur s’est produite. Réessayez dans un instant.', again: 'Refaire le test',
   cardKicker: 'ÉCOUTEZ VOS POUMONS', cardTitle: 'J’ai testé mes poumons aujourd’hui.', cardAir: 'Qualité de l’air en ce moment ({p}) : {l} (US AQI {n}).', cardAlt: 'Deux minutes. Gratuit. Anonyme.', cardCta: 'Faites le test : ',
-  shareMsg: 'Je viens de faire un test gratuit de 2 minutes sur la santé de mes poumons avec {h}. Faites le vôtre : {tag}'
+  shareMsg: 'J’ai testé mes poumons aujourd’hui avec le Lung Check gratuit de 2 minutes de {h}. 🫁\n{air}\nÀ vous : c’est gratuit, anonyme et ça prend 2 minutes 👇\n{url}\n{tag}',
+  pasteHint: 'Texte du message copié. S’il n’apparaît pas, collez-le dans votre publication.'
 },
 es: {
   q: [
@@ -103,7 +104,7 @@ es: {
   pm: 'Partículas finas (PM2,5): {v}', pmOver: ', unas {x} veces la guía de la OMS para 24 horas', pmOk: ', dentro de la guía de la OMS para 24 horas',
   model: 'Estimación por modelo (Copernicus CAMS vía Open-Meteo). Las estaciones de medición locales pueden dar otros valores.',
   shareTitle: 'Invite a sus amigos a hacer la prueba', shareText: 'Comparta la tarjeta. Muestra que hizo la prueba y el aire de su ciudad, no sus respuestas.',
-  save: 'Guardar imagen', copy: 'Copiar enlace', copied: 'Enlace copiado.', saved: 'Imagen guardada. Publíquela con {tag}', saveBlocked: 'No se puede guardar aquí. Haga una captura de pantalla de la tarjeta.',
+  save: 'Guardar imagen', copy: 'Copiar mensaje', copied: 'Texto copiado. Péguelo donde quiera.', saved: 'Imagen guardada. Publíquela con {tag}', saveBlocked: 'No se puede guardar aquí. Haga una captura de pantalla de la tarjeta.',
   waitTitle: 'Próximamente: la prueba de respiración', waitText: 'Estamos creando una herramienta de IA que escucha su respiración con el micrófono del teléfono. Únase a la lista de espera para probarla primero.',
   email: 'Correo electrónico', iam: 'Soy', country: 'País', donate: 'Quiero ayudar a entrenar la prueba donando más adelante una breve grabación de mi respiración.',
   consent: 'Acepto que GALA Health me escriba sobre la prueba y la prueba de respiración. Puedo darme de baja en cualquier momento.', privacy: 'Política de privacidad',
@@ -111,7 +112,8 @@ es: {
   badEmail: 'Introduzca un correo electrónico válido.', tick: 'Marque la casilla de consentimiento para unirse.', notConnected: 'La lista de espera aún no está conectada. Escriba a info@galahealth.org.',
   error: 'Algo salió mal. Inténtelo de nuevo en un momento.', again: 'Repetir la prueba',
   cardKicker: 'ESCUCHA TUS PULMONES', cardTitle: 'Hoy revisé mis pulmones.', cardAir: 'El aire en {p} ahora: {l} (US AQI {n}).', cardAlt: 'Dos minutos. Gratis. Anónimo.', cardCta: 'Haz la tuya: ',
-  shareMsg: 'Acabo de hacer una prueba gratuita de 2 minutos sobre la salud de mis pulmones de {h}. Haz la tuya: {tag}'
+  shareMsg: 'Hoy revisé mis pulmones con el Lung Check gratuito de 2 minutos de {h}. 🫁\n{air}\nTe toca: es gratis, anónimo y toma 2 minutos 👇\n{url}\n{tag}',
+  pasteHint: 'Texto copiado. Si no aparece, péguelo en su publicación.'
 },
 ru: {
   q: [
@@ -159,7 +161,7 @@ ru: {
   pm: 'Мелкие частицы (PM2,5): {v}', pmOver: ', примерно в {x} раз выше 24-часового ориентира ВОЗ', pmOk: ', в пределах 24-часового ориентира ВОЗ',
   model: 'Модельная оценка (Copernicus CAMS через Open-Meteo). Местные станции мониторинга могут показывать другие значения.',
   shareTitle: 'Предложите друзьям тоже проверить лёгкие', shareText: 'Поделитесь карточкой. На ней видно, что вы прошли проверку, и воздух в вашем городе, но не ваши ответы.',
-  save: 'Сохранить картинку', copy: 'Копировать ссылку', copied: 'Ссылка скопирована.', saved: 'Картинка сохранена. Опубликуйте её с {tag}', saveBlocked: 'Сохранение здесь заблокировано. Сделайте снимок экрана карточки.',
+  save: 'Сохранить картинку', copy: 'Копировать текст', copied: 'Текст скопирован. Вставьте его куда угодно.', saved: 'Картинка сохранена. Опубликуйте её с {tag}', saveBlocked: 'Сохранение здесь заблокировано. Сделайте снимок экрана карточки.',
   waitTitle: 'Скоро: дыхательный тест', waitText: 'Мы создаём ИИ-инструмент, который слушает ваше дыхание через микрофон телефона. Запишитесь в лист ожидания, чтобы попробовать первыми.',
   email: 'Эл. почта', iam: 'Я', country: 'Страна', donate: 'Я хочу помочь обучить тест и позже записать короткую запись своего дыхания.',
   consent: 'Я согласен(на) получать письма GALA Health о проверке лёгких и дыхательном тесте. Отписаться можно в любой момент.', privacy: 'Политика конфиденциальности',
@@ -167,6 +169,7 @@ ru: {
   badEmail: 'Введите корректный адрес эл. почты.', tick: 'Отметьте согласие, чтобы записаться.', notConnected: 'Лист ожидания ещё не подключён. Напишите на info@galahealth.org.',
   error: 'Что-то пошло не так. Попробуйте ещё раз.', again: 'Пройти проверку ещё раз',
   cardKicker: 'УСЛЫШЬ СВОИ ЛЁГКИЕ', cardTitle: 'Сегодня я проверил(а) свои лёгкие.', cardAir: 'Воздух сейчас ({p}): {l} (US AQI {n}).', cardAlt: 'Две минуты. Бесплатно. Анонимно.', cardCta: 'Проверьте себя: ',
-  shareMsg: 'Я прошёл(ла) бесплатную 2-минутную проверку здоровья лёгких от {h}. Проверьте себя: {tag}'
+  shareMsg: 'Сегодня я проверил(а) свои лёгкие с бесплатным 2-минутным Lung Check от {h}. 🫁\n{air}\nТеперь вы: бесплатно, анонимно и всего 2 минуты 👇\n{url}\n{tag}',
+  pasteHint: 'Текст поста скопирован. Если он не появился, вставьте его в пост.'
 }
 };
