@@ -61,7 +61,7 @@ const EN = {
   pm: 'Fine particles (PM2.5): {v}', pmOver: ', about {x}× the WHO 24-hour guideline', pmOk: ', within the WHO 24-hour guideline',
   model: 'Model estimate (Copernicus CAMS via Open-Meteo). Local monitoring stations may read differently.',
   shareTitle: 'Ask your friends to check too', shareText: 'Share the card. It shows you took the check and the air in your city, not your answers.',
-  save: 'Save image', copy: 'Copy link', copied: 'Link copied.', saved: 'Image saved. Post it with {tag}', saveBlocked: 'Saving is blocked here. Take a screenshot of the card instead.',
+  save: 'Save image', copy: 'Copy post', copied: 'Post text copied. Paste it anywhere.', saved: 'Image saved. Post it with {tag}', saveBlocked: 'Saving is blocked here. Take a screenshot of the card instead.',
   waitTitle: 'Coming soon: the breath test', waitText: "We're building an AI check that listens to your breathing through your phone's microphone. Join the waitlist to try it first.",
   email: 'Email', iam: 'I am', country: 'Country', donate: "I'd like to help train the breath test by donating a short breathing recording later.",
   consent: 'I agree that GALA Health may email me about the Lung Check and breath test. I can unsubscribe any time.', privacy: 'Privacy Policy',
@@ -69,7 +69,8 @@ const EN = {
   badEmail: 'Please enter a valid email.', tick: 'Please tick the consent box to join.', notConnected: 'The waitlist is not connected yet. Please email info@galahealth.org.',
   error: 'Something went wrong. Please try again in a moment.', again: 'Take the check again',
   cardKicker: 'HEAR YOUR LUNGS', cardTitle: 'I checked my lungs today.', cardAir: 'Air in {p} right now: {l} (US AQI {n}).', cardAlt: 'Two minutes. Free. Anonymous.', cardCta: 'Check yours: ',
-  shareMsg: 'I just took a free 2-minute lung health check from {h}. Check yours: {tag}'
+  shareMsg: 'I checked my lungs today with the free 2-minute Lung Check from {h}. 🫁\n{air}\nYour turn: it’s free, anonymous and takes 2 minutes 👇\n{url}\n{tag}',
+  pasteHint: 'Post text copied. If it doesn’t appear, paste it into your post.'
 };
 const T = Object.assign({}, EN, (window.LC_I18N || {})[LANG] || {});
 const tf = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? '');
@@ -186,14 +187,23 @@ function results() {
     </div>
     <div class="lc-nav"><button class="btn btn--ghost" data-go="again">${esc(T.again)}</button></div>
   </div>`;
-  const text = tf(T.shareMsg, {h: LC.handle, tag: LC.tag});
-  const u = encodeURIComponent(LC.pageUrl), t = encodeURIComponent(text);
-  const links = {x: `https://x.com/intent/tweet?text=${t}&url=${u}`, li: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`,
-    wa: `https://wa.me/?text=${t}%20${u}`, tg: `https://t.me/share/url?url=${u}&text=${t}`};
+  const E = encodeURIComponent, u = E(LC.pageUrl);
+  // X gets the @handle and its own link card; LinkedIn opens the composer with the whole post filled in
+  const links = {x: `https://x.com/intent/tweet?text=${E(postText('x', false))}&url=${u}`,
+    li: `https://www.linkedin.com/feed/?shareActive=true&text=${E(postText('li'))}`,
+    wa: `https://wa.me/?text=${E(postText('wa'))}`, tg: `https://t.me/share/url?url=${u}&text=${E(postText('tg', false))}`};
   root.querySelectorAll('[data-net]').forEach(a => { a.href = links[a.dataset.net]; });
   drawCard();
   root.querySelector('.lc-q').focus({preventScroll: true});
   root.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+// First-person post: "I checked my lungs…", the air in their city (never their answers or risk band), and a call to try it
+function postText(net, withUrl = true) {
+  const a = st.air;
+  const air = a && !a.error ? tf(T.cardAir, {p: placeName(), l: T.aqi[aqiIdx(a.aqi)][0].toLowerCase(), n: Math.round(a.aqi)}) : '';
+  return tf(T.shareMsg, {h: net === 'x' ? LC.handle : 'GALA Health', air, url: withUrl ? LC.pageUrl : '', tag: LC.tag})
+    .split('\n').filter(l => l.trim()).join('\n\n');
 }
 
 function wrap(ctx, txt, x, y, w, lh) {
@@ -297,7 +307,7 @@ root.addEventListener('click', e => {
     c.toBlob(async blob => {
       try {
         const f = new File([blob], 'my-lung-check.png', {type: 'image/png'});
-        if (navigator.canShare && navigator.canShare({files: [f]})) { await navigator.share({files: [f], text: LC.tag + ' ' + LC.pageUrl}); return; }
+        if (navigator.canShare && navigator.canShare({files: [f]})) { await navigator.share({files: [f], text: postText('li')}); return; }
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-lung-check.png';
         document.body.appendChild(a); a.click(); a.remove();
         m.textContent = tf(T.saved, {tag: LC.tag});
@@ -306,8 +316,16 @@ root.addEventListener('click', e => {
   }
   else if (g === 'copy') {
     const m = root.querySelector('.lc-sharemsg');
-    navigator.clipboard.writeText(LC.pageUrl).then(() => m.textContent = T.copied, () => m.textContent = LC.pageUrl);
+    const txt = postText('li');
+    navigator.clipboard.writeText(txt).then(() => m.textContent = T.copied, () => m.textContent = txt);
   }
+});
+
+// Also copy the post text when a network button is used, in case the app drops the pre-filled text
+root.addEventListener('click', e => {
+  const a = e.target.closest('a[data-net]'); if (!a || !navigator.clipboard) return;
+  const m = root.querySelector('.lc-sharemsg');
+  navigator.clipboard.writeText(postText(a.dataset.net)).then(() => { if (m) m.textContent = T.pasteHint; }, () => {});
 });
 
 root.addEventListener('submit', async e => {
